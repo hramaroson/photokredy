@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
-Mobile app providing fast and easy prepaid phone card scanning
+Mobile app providing prepaid phone card fast and easy scanning.
 
 ## Licenses
 <img src="https://gnu.org/graphics/gplv3-127x51.png" alt=""/>
