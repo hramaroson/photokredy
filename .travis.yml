@@ -1,6 +1,7 @@
 os:
   - linux
-
+language: android
+  
 sudo: false
 addons:
   apt:
@@ -20,3 +21,10 @@ script:
 cache:
   directories:
     - $HOME/.pub-cache
+
+deploy:
+  provider: releases
+  file: "./build/app/outputs/apk/PhotoKredy-1.0.0-release.apk"
+  skip_cleanup: true
+  on:
+    tags: true
