@@ -22,9 +22,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 
 
 ### Third party
-#### Flutter
-<img src="https://flutter.io/images/flutter-mark-square-100.png" alt="Flutter" width="40" height="40" />
+#### <img src="https://flutter.io/images/flutter-mark-square-100.png" alt="Flutter" width="40" height="40"/> Flutter
 
 Flutter is Google’s mobile app SDK for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source. 
 
-License is [!https://github.com/flutter/flutter/blob/master/LICENSE](here).
+License is [here](https://github.com/flutter/flutter/blob/master/LICENSE).
