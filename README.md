@@ -1,6 +1,7 @@
 # PhotoKredy
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
+[![Build Status](https://travis-ci.org/hramaroson/PhotoKredy.svg?branch=master)](https://travis-ci.org/hramaroson/PhotoKredy)
 
 Mobile app providing prepaid phone card fast and easy scanning.
 
