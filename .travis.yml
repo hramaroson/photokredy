@@ -31,7 +31,7 @@ cache:
 
 deploy:
   provider: releases
-  file: "$TRAVIS_BUILD_DIR/build/app/outputs/apk/PhotoKredy-1.0.0-release.apk"
+  file: "$TRAVIS_BUILD_DIR/build/app/outputs/apk/app-release.apk"
   skip_cleanup: true
   on:
     tags: true
