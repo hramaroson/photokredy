@@ -1,6 +1,6 @@
 os:
   - linux
-  
+
 language: android
 
 android: 
@@ -23,7 +23,7 @@ before_script:
   - ./flutter/bin/flutter doctor
 
 script:
-  - ./flutter/bin/flutter test
+  - ./flutter/bin/flutter build apk
 
 cache:
   directories:
@@ -31,7 +31,7 @@ cache:
 
 deploy:
   provider: releases
-  file: "./build/app/outputs/apk/PhotoKredy-1.0.0-release.apk"
+  file: "$TRAVIS_BUILD_DIR/build/app/outputs/apk/PhotoKredy-1.0.0-release.apk"
   skip_cleanup: true
   on:
     tags: true
