@@ -5,6 +5,19 @@
 
 Mobile app providing prepaid phone card fast and easy scanning.
 
+# Building the project
+## Requirements
+* Android SDK
+* Flutter
+
+### Building from text editor
+TODO
+
+### Building from command line
+```
+./flutter/bin/flutter build apk
+```
+
 ## Licenses
 <img src="https://gnu.org/graphics/gplv3-127x51.png" alt=""/>
 
