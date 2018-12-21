@@ -1,4 +1,4 @@
-package com.example.photokredy;
+package com.hramaroson.photokredy;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
