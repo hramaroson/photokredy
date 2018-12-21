@@ -15,7 +15,7 @@ TODO
 
 ### Building from command line
 ```
-./flutter/bin/flutter build apk
+$flutter build apk
 ```
 
 ## Licenses
