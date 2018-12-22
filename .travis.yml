@@ -5,7 +5,7 @@ language: android
 
 env:
   global:
-    - ANDROID_API=28
+    - ANDROID_API=27
     - ANDROID_BUILD_TOOLS=28.0.3
 
 android: 
@@ -41,7 +41,7 @@ stages:
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-  
+
 cache:
   directories:
     - $HOME/.pub-cache
