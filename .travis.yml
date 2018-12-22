@@ -29,6 +29,8 @@ stages:
   - build 
   - name: deploy
     if: branch = master
+
+
 cache:
   directories:
     - "$HOME/.pub-cache"
@@ -40,14 +42,15 @@ cache:
 
 jobs:
   include: 
-    - stage: Build
+    - stage: build
       - before_script:
         - git clone https://github.com/flutter/flutter.git -b beta
         - ./flutter/bin/flutter doctor
       - script:
         - ./flutter/bin/flutter build apk --debug
         - ./flutter/bin/flutter build apk --release
-    - stage: Deploy to GitHub release
+    - stage: deploy
+      script: echo "Deploying to GitHub releases ..."
       deploy:
         provider: releases
         file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/*.apk
