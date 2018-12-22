@@ -3,10 +3,17 @@ os:
 
 language: android
 
+env:
+  global:
+    - ANDROID_API=28
+    - ANDROID_BUILD_TOOLS=28.0.3
+
 android: 
   components:
-  - build-tools-28.0.3
-  - android-27
+  - build-tools-ANDROID_BUILD_TOOLS
+  - android-$ANDROID_API
+  - tools
+  - platform-tools
 
   
 sudo: false
@@ -18,20 +25,32 @@ addons:
       - libstdc++6
       - fonts-droid
 
-before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
-  - ./flutter/bin/flutter doctor
-
-script:
-  - ./flutter/bin/flutter build apk
-
+stages:
+  - build 
+  - name: deploy
+    if: branch = master
 cache:
   directories:
-    - $HOME/.pub-cache
+    - "$HOME/.pub-cache"
+    - "$HOME/.android/build-cache"
+    - "$HOME/.m2"
+    - "$HOME/.gradle"
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
 
-deploy:
-  provider: releases
-  file: "./build/app/outputs/apk/app-release.apk"
-  skip_cleanup: true
-  on:
-    tags: true
+jobs:
+  include: 
+    - stage: Build
+      - before_script:
+        - git clone https://github.com/flutter/flutter.git -b beta
+        - ./flutter/bin/flutter doctor
+      - script:
+        - ./flutter/bin/flutter build apk --debug
+        - ./flutter/bin/flutter build apk --release
+    - stage: Deploy to GitHub release
+      deploy:
+        provider: releases
+        file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/*.apk
+        skip_cleanup: true
+        on:
+          tags: true
