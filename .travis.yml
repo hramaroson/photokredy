@@ -3,5 +3,15 @@ os:
 
 language: android
 
+env:
+  global:
+    - ANDROID_API=28
+    - ANDROID_BUILD_TOOLS=28.0.3
 
+android: 
+  components:
+  - build-tools-$ANDROID_BUILD_TOOLS
+  - android-$ANDROID_API
+  - tools
+  - platform-tools
 
