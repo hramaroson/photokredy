@@ -8,14 +8,21 @@ env:
     - ANDROID_API=28
     - ANDROID_BUILD_TOOLS=28.0.3
 
+licenses:
+    - 'android-sdk-license-.+'
+
 android: 
   components:
   - build-tools-$ANDROID_BUILD_TOOLS
   - android-$ANDROID_API
   - tools
   - platform-tools
+  - extra-android-m2repository
+  - extra-google-m2repository
+  - extra-google-android-support
 
 sudo: false
+jdk: oraclejdk8
 
 addons:
   apt:
@@ -33,10 +40,25 @@ stages:
 
 cache:
   directories:
-    - "$HOME/.pub-cache"
-    - "$HOME/.android/build-cache"
-    - "$HOME/.m2"
-    - "$HOME/.gradle"
-    - "$HOME/.gradle/caches/"
-    - "$HOME/.gradle/wrapper/"
+    - $HOME/.pub-cache
+    - $HOME/.android/build-cache
+    - $HOME/.m2
+    - $HOME/.gradle
+    - $HOME/.gradle/caches
+    - $HOME/.gradle/wrapper
+
+
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
+script:
+  - ./flutter/bin/flutter build apk --debug
+  - ./flutter/bin/flutter build apk --release
+deploy:
+    provider: releases
+    file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/*.apk
+    skip_cleanup: true
+    if: branch = master
+    on:
+      tags: true
 
