@@ -8,9 +8,6 @@ env:
     - ANDROID_API=28
     - ANDROID_BUILD_TOOLS=28.0.3
 
-licenses:
-    - 'android-sdk-license-.+'
-
 android: 
   components:
   - build-tools-$ANDROID_BUILD_TOOLS
@@ -20,6 +17,10 @@ android:
   - extra-android-m2repository
   - extra-google-m2repository
   - extra-google-android-support
+
+before_install:
+    - yes | sdkmanager "platforms;android-$ANDROID_API"
+    - yes | sdkmanager "build-tools;build-tools-$ANDROID_BUILD_TOOLS"
 
 sudo: false
 jdk: oraclejdk8
