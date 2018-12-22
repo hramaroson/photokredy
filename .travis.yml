@@ -10,12 +10,11 @@ env:
 
 android: 
   components:
-  - build-tools-ANDROID_BUILD_TOOLS
+  - build-tools-$ANDROID_BUILD_TOOLS
   - android-$ANDROID_API
   - tools
   - platform-tools
 
-  
 sudo: false
 addons:
   apt:
@@ -57,3 +56,4 @@ jobs:
         skip_cleanup: true
         on:
           tags: true
+          
