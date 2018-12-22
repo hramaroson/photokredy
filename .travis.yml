@@ -20,7 +20,7 @@ android:
 
 before_install:
     - yes | sdkmanager "platforms;android-$ANDROID_API"
-    - yes | sdkmanager "build-tools;build-tools-$ANDROID_BUILD_TOOLS"
+    - yes | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS"
 
 sudo: false
 jdk: oraclejdk8
