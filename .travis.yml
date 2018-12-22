@@ -15,3 +15,28 @@ android:
   - tools
   - platform-tools
 
+sudo: false
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++6
+      - fonts-droid
+
+stages:
+  - build 
+  - name: deploy
+    if: branch = master
+
+
+cache:
+  directories:
+    - "$HOME/.pub-cache"
+    - "$HOME/.android/build-cache"
+    - "$HOME/.m2"
+    - "$HOME/.gradle"
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+
