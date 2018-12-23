@@ -24,6 +24,33 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// task renameReleaseApkFile {
+//     doLast {
+//         print "Rename output apk file names...."
+//         // verify that the build was generated successfully
+//         ext.path = "../../build/app/outputs/apk/release" 
+//         ext.apkFile = file("${ext.path}/app-release.apk")
+//         if(ext.apkFile.exists()) { 
+//             copy {
+//                 from ext.path
+//                 include apkFile.name
+//                 into ext.path
+                
+//                 rename { "photokredy-v${flutterVersionName}-release.apk" }
+//             }
+//             delete ext.apkFile
+
+//         }
+//         println "Done"
+//     }
+// }
+
+afterEvaluate {
+    if (project.hasProperty("assembleRelease")) {
+        assembleRelease.finalizedBy(renameReleaseApkFile)
+     }
+}
+
 android {
     compileSdkVersion 27
 
