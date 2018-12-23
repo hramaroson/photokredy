@@ -45,11 +45,11 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 //     }
 // }
 
-afterEvaluate {
-    if (project.hasProperty("assembleRelease")) {
-        assembleRelease.finalizedBy(renameReleaseApkFile)
-     }
-}
+// afterEvaluate {
+//     if (project.hasProperty("assembleRelease")) {
+//         assembleRelease.finalizedBy(renameReleaseApkFile)
+//      }
+// }
 
 android {
     compileSdkVersion 27
