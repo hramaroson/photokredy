@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 android {
     compileSdkVersion 27
 
-     applicationVariants.all { variant ->
+    applicationVariants.all { variant ->
         variant.outputs.all { output ->
             outputFileName = "photokredy-v${variant.versionName}-${variant.name}.apk"
         }
@@ -38,7 +38,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.photokredy"
+        applicationId "com.hramaroson.photokredy" 
         minSdkVersion 21
         targetSdkVersion 27
         versionCode flutterVersionCode.toInteger()
