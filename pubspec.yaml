@@ -21,7 +21,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   shared_preferences: "^0.4.1"
-  camera: "^0.2.6" 
+  flutter_mobile_vision: "^0.1.3"
 
 dev_dependencies:
   flutter_test:
