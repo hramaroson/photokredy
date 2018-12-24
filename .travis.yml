@@ -51,8 +51,8 @@ before_script:
   - git clone https://github.com/flutter/flutter.git -b beta
   - ./flutter/bin/flutter doctor
 script:
-  - ./flutter/bin/flutter build apk --debug || true
-  - ./flutter/bin/flutter build apk --release || true
+  - ./flutter/bin/flutter build apk --debug 
+  - ./flutter/bin/flutter build apk --release
 deploy:
     provider: releases
     file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/*.apk
