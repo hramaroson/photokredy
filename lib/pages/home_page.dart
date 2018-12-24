@@ -16,6 +16,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      ),
       drawer: new Drawer(
           child: new ListView(
             padding: EdgeInsets.zero,
