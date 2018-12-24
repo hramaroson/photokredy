@@ -18,16 +18,14 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       drawer: new Drawer(
           child: new ListView(
+            padding: EdgeInsets.zero,
             children: <Widget>[
-              Container(
-                height: 50,
-                child: new DrawerHeader(
-                  child: new Text("PhotoKredy" , style: new TextStyle(fontSize: 20.0,)),
+              new DrawerHeader(
+                child: new Text("PhotoKredy" , style: new TextStyle(fontSize: 20.0,)),
                   decoration: new BoxDecoration(
                       color: Colors.blue
                   ),
-                ),
-              ),
+               ),
               new ListTile(
                 leading: const Icon(Icons.info_outline),
                 title: const Text("About"),
