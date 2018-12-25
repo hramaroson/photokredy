@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'about_page.dart';
 import 'settings_page.dart';
+
 import '../globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
@@ -40,13 +41,16 @@ class _HomePageState extends State<HomePage> {
       setState(() {});
     });
   }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
       drawer: new Drawer(
           child: new ListView(
             padding: EdgeInsets.zero,
@@ -78,10 +82,27 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: new  AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: CameraPreview(controller),
-          ),
+        body: Stack(
+          children: <Widget>[
+            new Container(
+                color: Colors.black,
+            ),
+            new AspectRatio(
+              aspectRatio: controller.value.aspectRatio,
+              child: CameraPreview(controller),
+            ),
+            new Positioned(
+              top: 0.0,
+              left: 0.0,
+              right: 0.0,
+              bottom: 0.0,
+              child: new AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+              ),
+            )
+          ],
+        )
     );
   }
 }

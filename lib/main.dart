@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:camera/camera.dart';
 import 'pages/home_page.dart';
+
 import 'globals.dart' as globals;
 
 Future<Null> main() async {
@@ -30,19 +31,10 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
-   CameraController controller;
-
   @override
   void initState() {
     super.initState();
   }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
 
   @override
   Widget build(BuildContext context) {
