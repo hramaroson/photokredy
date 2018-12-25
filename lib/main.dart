@@ -15,11 +15,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_mobile_vision/flutter_mobile_vision.dart';
+import 'package:camera/camera.dart';
 import 'pages/home_page.dart';
+import 'globals.dart' as globals;
 
 Future<Null> main() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    
+    globals.cameras = await availableCameras();
     runApp(MyApp());
 }
 class MyApp extends StatefulWidget {
@@ -27,11 +30,19 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
-   @override
+   CameraController controller;
+
+  @override
   void initState() {
     super.initState();
-    FlutterMobileVision.start().then((x) => setState(() {}));
   }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
