@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    controller = CameraController(globals.cameras[0], ResolutionPreset.high);
+    controller = new CameraController(globals.cameras[0], ResolutionPreset.high);
     controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -51,26 +51,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      drawer: new Drawer(
-          child: new ListView(
+      drawer: Drawer(
+          child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              new DrawerHeader(
-                child: new Text("PhotoKredy" , style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
+              DrawerHeader(
+                child: Text("PhotoKredy" , style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
                   decoration: new BoxDecoration(
                       color: Colors.blue
                   ),
                ),
-              new ListTile(
+              ListTile(
                 leading: const Icon(Icons.info_outline , color: Colors.blue,),
-                title: new Text("About", style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                title: Text("About", style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context, 
                     new MaterialPageRoute(builder: (context) => new AboutPage()));
                 },
               ),
-              new ListTile(
+              ListTile(
                 leading: const Icon(Icons.settings , color: Colors.blue,),
                 title: new Text("Settings", style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
@@ -84,21 +84,27 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Stack(
           children: <Widget>[
-            new Container(
+            Container(
                 color: Colors.black,
             ),
-            new AspectRatio(
+            AspectRatio(
               aspectRatio: controller.value.aspectRatio,
               child: CameraPreview(controller),
             ),
-            new Positioned(
+            Positioned(
               top: 0.0,
               left: 0.0,
               right: 0.0,
               bottom: 0.0,
-              child: new AppBar(
+              child: AppBar(
                   backgroundColor: Colors.transparent,
                   elevation: 0.0,
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.flash_off),
+                      onPressed: () {},
+                    )
+                  ],
               ),
             )
           ],
