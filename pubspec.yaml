@@ -23,9 +23,9 @@ dependencies:
   shared_preferences: "^0.4.1"
   camera: ^0.2.6
   
-  flutter_camerakit: 
+  flutter_cameraview: 
     git:
-      url: https://github.com/hramaroson/flutter_camerakit.git
+      url: https://github.com/hramaroson/flutter_cameraview.git
 
 dev_dependencies:
   flutter_test:
