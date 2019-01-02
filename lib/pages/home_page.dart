@@ -14,11 +14,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'about_page.dart';
 import 'settings_page.dart';
-
-import '../globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -27,24 +24,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  CameraController controller;
-
   @override
   void initState() {
     super.initState();
-
-    controller = new CameraController(globals.cameras[0], ResolutionPreset.high);
-    controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    });
   }
 
   @override
   void dispose() {
-    controller?.dispose();
     super.dispose();
   }
 
@@ -87,9 +73,8 @@ class _HomePageState extends State<HomePage> {
             Container(
                 color: Colors.black,
             ),
-            AspectRatio(
-              aspectRatio: controller.value.aspectRatio,
-              child: CameraPreview(controller),
+            Container(
+              child: CameraView(),
             ),
             Positioned(
               top: 0.0,
