@@ -15,15 +15,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:camera/camera.dart';
 import 'pages/home_page.dart';
-
-import 'globals.dart' as globals;
 
 Future<Null> main() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    
-    globals.cameras = await availableCameras();
     runApp(MyApp());
 }
 class MyApp extends StatefulWidget {

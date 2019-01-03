@@ -16,6 +16,7 @@
 import 'package:flutter/material.dart';
 import 'about_page.dart';
 import 'settings_page.dart';
+import 'package:flutter_cameraview/flutter_cameraview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage();

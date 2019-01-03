@@ -21,7 +21,6 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   shared_preferences: "^0.4.1"
-  camera: ^0.2.6
   
   flutter_cameraview: 
     git:
