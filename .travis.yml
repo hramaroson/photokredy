@@ -5,7 +5,7 @@ language: android
 
 env:
   global:
-    - ANDROID_API=27
+    - ANDROID_API=28
     - ANDROID_BUILD_TOOLS=28.0.3
 
 android: 
@@ -51,8 +51,8 @@ before_script:
   - git clone https://github.com/flutter/flutter.git -b beta
   - ./flutter/bin/flutter doctor
 script:
-  - ./flutter/bin/flutter build apk --debug 
-  - ./flutter/bin/flutter build apk --release
+  - ./flutter/bin/flutter build apk --debug -v 
+  - ./flutter/bin/flutter build apk --release -v
 deploy:
     provider: releases
     file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/*.apk
