@@ -25,6 +25,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  CameraViewController _cameraViewController;
+  Icon _flashButtonIcon = Icon(Icons.flash_off);
+
   @override
   void initState() {
     super.initState();
@@ -75,7 +78,9 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
             ),
             Container(
-              child: CameraView(),
+              child: CameraView(
+                onCameraViewCreated: _onCameraViewCreated,
+              ),
             ),
             Positioned(
               top: 0.0,
@@ -87,8 +92,8 @@ class _HomePageState extends State<HomePage> {
                   elevation: 0.0,
                   actions: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.flash_off),
-                      onPressed: () {},
+                      icon: _flashButtonIcon,
+                      onPressed: _onFlashButtonPressed,
                     )
                   ],
               ),
@@ -96,5 +101,28 @@ class _HomePageState extends State<HomePage> {
           ],
         )
     );
+  }
+
+  void _onCameraViewCreated(CameraViewController controller){
+    _cameraViewController = controller;
+  }
+
+  void _onFlashButtonPressed() async {
+    Flash _flash = await _cameraViewController.getFlash();
+    Icon _icon = Icon(Icons.flash_off);
+    if(_flash == Flash.Off) {
+        _flash = Flash.Torch;
+        _icon = Icon(Icons.flash_on);
+    }
+    else {
+      _flash = Flash.Off;
+      _icon = Icon(Icons.flash_off);
+    }
+
+    await _cameraViewController.setFlash(_flash);
+
+    setState(() {
+        _flashButtonIcon = _icon;
+    });
   }
 }
