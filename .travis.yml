@@ -50,6 +50,8 @@ cache:
 before_script:
   - git clone https://github.com/flutter/flutter.git -b beta
   - ./flutter/bin/flutter doctor
+  - ./flutter/bin/flutter packages upgrade
+  
 script:
   - ./flutter/bin/flutter build apk --debug -v 
   - ./flutter/bin/flutter build apk --release -v
