@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container(
               child: CameraView(
-                onCameraViewCreated: _onCameraViewCreated,
+                onCreated: _onCameraViewCreated,
               ),
             ),
             Positioned(
