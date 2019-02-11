@@ -97,6 +97,19 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
               ),
+            ),
+            Positioned(
+              bottom: 20.0,
+              width: 40.0,
+              height: 40.0,
+              right: 40.0,
+              child: new IconButton(
+                color: Colors.white,
+                icon: new Icon(Icons.settings),
+                onPressed: () {
+                  new SettingsPage();
+                },
+              )
             )
           ],
         )
