@@ -65,8 +65,7 @@ class _HomePageState extends State<HomePage> {
                 title: new Text("Settings", style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, 
-                  new MaterialPageRoute(builder: (context) => new SettingsPage()));
+                  _showSettingsPage();
                 },
               ),
             ],
@@ -102,13 +101,12 @@ class _HomePageState extends State<HomePage> {
               bottom: 20.0,
               width: 40.0,
               height: 40.0,
-              right: 40.0,
+              right: 10.0,
               child: new IconButton(
                 color: Colors.white,
                 icon: new Icon(Icons.settings),
-                onPressed: () {
-                  new SettingsPage();
-                },
+                onPressed: () => _showSettingsPage()
+                
               )
             )
           ],
@@ -137,5 +135,9 @@ class _HomePageState extends State<HomePage> {
     setState(() {
         _flashButtonIcon = _icon;
     });
+  }
+
+  void _showSettingsPage(){
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new SettingsPage()));
   }
 }
