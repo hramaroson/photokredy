@@ -1,25 +1,14 @@
 package com.hramaroson.photokredy.core;
 
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.plugin.common.PluginRegistry;
 
 /** PhotokredyCorePlugin */
-public class PhotokredyCorePlugin implements MethodCallHandler {
+public class PhotokredyCorePlugin  {
   /** Plugin registration. */
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "photokredy_core");
-    channel.setMethodCallHandler(new PhotokredyCorePlugin());
-  }
-
-  @Override
-  public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
-    } else {
-      result.notImplemented();
-    }
+  public static void registerWith(PluginRegistry.Registrar registrar) {
+    registrar.platformViewRegistry()
+             .registerViewFactory(
+                  "plugins.hramaroson.github.io/cameraview",
+                     new CameraViewFactory(registrar.messenger(), registrar.activity()));
   }
 }

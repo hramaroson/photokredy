@@ -14,6 +14,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:photokredy_core/photokredy_core.dart';
+
 import 'about_page.dart';
 import 'settings_page.dart';
 
@@ -24,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//  CameraViewController _cameraViewController;
+  CameraViewController _cameraViewController;
   Icon _flashButtonIcon = Icon(Icons.flash_off);
 
   @override
@@ -75,11 +77,11 @@ class _HomePageState extends State<HomePage> {
             Container(
                 color: Colors.black,
             ),
-//            Container(
-//              child: CameraView(
-//                onCreated: _onCameraViewCreated,
-//              ),
-//            ),
+            Container(
+              child: CameraView(
+                onCreated: _onCameraViewCreated,
+              ),
+            ),
             Positioned(
               top: 0.0,
               left: 0.0,
@@ -112,23 +114,23 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-//  void _onCameraViewCreated(CameraViewController controller){
-//    _cameraViewController = controller;
-//  }
+  void _onCameraViewCreated(CameraViewController controller){
+    _cameraViewController = controller;
+  }
 
   void _onFlashButtonPressed() async {
-//    Flash _flash = await _cameraViewController.getFlash();
+    Flash _flash = await _cameraViewController.getFlash();
     Icon _icon = Icon(Icons.flash_off);
-//    if(_flash == Flash.Off) {
-//        _flash = Flash.Torch;
-//        _icon = Icon(Icons.flash_on);
-//    }
-//    else {
-//      _flash = Flash.Off;
-//      _icon = Icon(Icons.flash_off);
-//    }
+    if(_flash == Flash.Off) {
+        _flash = Flash.Torch;
+        _icon = Icon(Icons.flash_on);
+    }
+    else {
+      _flash = Flash.Off;
+      _icon = Icon(Icons.flash_off);
+    }
 
-//    await _cameraViewController.setFlash(_flash);
+    await _cameraViewController.setFlash(_flash);
 
     setState(() {
         _flashButtonIcon = _icon;

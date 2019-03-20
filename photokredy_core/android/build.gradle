@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.1'
     }
 }
 
@@ -30,5 +30,11 @@ android {
     }
     lintOptions {
         disable 'InvalidPackage'
+    }
+
+    dependencies {
+        api 'com.otaliastudios:cameraview:2.0.0-beta03'
+        api 'androidx.lifecycle:lifecycle-common:2.0.0'
+        implementation 'androidx.exifinterface:exifinterface:1.0.0'
     }
 }
