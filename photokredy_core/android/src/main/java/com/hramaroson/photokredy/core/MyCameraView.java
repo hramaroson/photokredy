@@ -34,7 +34,7 @@ public class MyCameraView implements PlatformView, MethodCallHandler,
 
         mCameraView.setMode(Mode.PICTURE);
         mCameraView.setAudio(Audio.OFF);
-        
+
         mCameraView.open();
 
     }
@@ -97,10 +97,6 @@ public class MyCameraView implements PlatformView, MethodCallHandler,
             case 0:
                 return Flash.OFF;
             case 1:
-                return Flash.ON;
-            case 2:
-                return Flash.AUTO;
-            case 3:
                 return Flash.TORCH;
             default:
                 break;
@@ -112,12 +108,8 @@ public class MyCameraView implements PlatformView, MethodCallHandler,
         switch (flash){
             case OFF:
                 return 0;
-            case ON:
-                return 1;
-            case AUTO:
-                return 2;
             case TORCH:
-                return 3;
+                return 1;
             default:
                 break;
         }
