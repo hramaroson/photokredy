@@ -25,13 +25,19 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => new _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver { 
   CameraViewController _cameraViewController;
   Icon _flashButtonIcon = Icon(Icons.flash_off);
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
@@ -134,9 +140,7 @@ class _HomePageState extends State<HomePage> {
     }
     
     if(await _cameraViewController.setFlash(_flash)) {
-      setState(() {
-        _flashButtonIcon = _icon;
-      });
+      setState(() => _flashButtonIcon = _icon);
     }
   }
 
