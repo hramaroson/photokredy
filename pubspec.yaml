@@ -21,10 +21,9 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   shared_preferences: "^0.5.0"
-  
-  flutter_cameraview: 
-    git:
-      url: https://github.com/hramaroson/flutter_cameraview.git
+
+  photokredy_core:
+    path: photokredy_core
 
 dev_dependencies:
   flutter_test:
