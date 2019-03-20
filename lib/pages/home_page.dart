@@ -13,8 +13,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:photokredy_core/photokredy_core.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'about_page.dart';
 import 'settings_page.dart';
@@ -31,17 +33,28 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance.addObserver(this);
+
+    super.initState();
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
     super.didChangeAppLifecycleState(state);
+
+    if(state == AppLifecycleState.resumed){
+        PermissionHandler handler = PermissionHandler();
+        if(await handler.checkPermissionStatus(PermissionGroup.camera) == PermissionStatus.disabled){
+            if (Platform.isAndroid) {
+                handler.shouldShowRequestPermissionRationale(PermissionGroup.camera);
+            }
+       }
+    }
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
