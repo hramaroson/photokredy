@@ -120,6 +120,9 @@ class _HomePageState extends State<HomePage> {
 
   void _onFlashButtonPressed() async {
     Flash _flash = await _cameraViewController.getFlash();
+    if(_flash == null)
+        return;
+
     Icon _icon = Icon(Icons.flash_off);
     if(_flash == Flash.Off) {
         _flash = Flash.Torch;
@@ -129,12 +132,12 @@ class _HomePageState extends State<HomePage> {
       _flash = Flash.Off;
       _icon = Icon(Icons.flash_off);
     }
-
-    await _cameraViewController.setFlash(_flash);
-
-    setState(() {
+    
+    if(await _cameraViewController.setFlash(_flash)) {
+      setState(() {
         _flashButtonIcon = _icon;
-    });
+      });
+    }
   }
 
   void _showSettingsPage(){

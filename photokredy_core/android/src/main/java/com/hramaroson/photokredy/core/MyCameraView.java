@@ -117,13 +117,19 @@ public class MyCameraView implements PlatformView, MethodCallHandler,
     }
 
     private void setFlash(MethodCall methodCall, MethodChannel.Result result){
-        if (!mCameraView.isTakingPicture() && !mCameraView.isTakingVideo()){
+        if (mCameraView.isOpened() && !mCameraView.isTakingPicture() && !mCameraView.isTakingVideo()){
             mCameraView.setFlash(__flashValueFromIndex((int) methodCall.arguments));
+            result.success (true);
+            return;
         }
-        result.success (null);
+        result.success(false);
     }
 
     private void getFlash(MethodCall methodCall, MethodChannel.Result result){
-        result.success(__flashIndexFromValue(mCameraView.getFlash()));
+        if(mCameraView.isOpened()){
+            result.success(__flashIndexFromValue(mCameraView.getFlash()));
+            return;
+        }
+        result.success(null);
     }
 }
