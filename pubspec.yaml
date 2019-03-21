@@ -23,7 +23,8 @@ dependencies:
   permission_handler: ^2.2.0
 
   photokredy_core:
-    path: photokredy_core
+    git: 
+      url: https://github.com/hramaroson/photokredy_core.git
 
 dev_dependencies:
   flutter_test:
