@@ -31,11 +31,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver { 
   CameraViewController _cameraViewController;
   Icon _flashButtonIcon = Icon(Icons.flash_off);
+  bool _hasCameraAccess = false;
 
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
-
     super.initState();
   }
 
@@ -45,17 +45,25 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
     if(state == AppLifecycleState.resumed){
         //Handle permissions
-        PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
-          if(permissions[PermissionGroup.camera] != PermissionStatus.granted){
-              Fluttertoast.showToast(
-                msg: "Sorry, PhotoKredy needs camera access to work!",
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.CENTER); 
+       PermissionHandler().checkPermissionStatus(PermissionGroup.camera).then((status){
+          setState(() {
+              _hasCameraAccess = (status == PermissionStatus.granted) ;
+          });
+       });
+        
+        
 
-            //Remove this activity from the stack and return to the previous activity (ignored on iOS)
-            SystemNavigator.pop();
-          }
-      });
+      //   PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
+      //     if(permissions[PermissionGroup.camera] != PermissionStatus.granted){
+      //         Fluttertoast.showToast(
+      //           msg: "Sorry, PhotoKredy needs camera access to work!",
+      //           toastLength: Toast.LENGTH_LONG,
+      //           gravity: ToastGravity.CENTER); 
+
+      //       //Remove this activity from the stack and return to the previous activity (ignored on iOS)
+      //       SystemNavigator.pop();
+      //     }
+      // });
     }
   }
 
@@ -119,7 +127,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   actions: <Widget>[
                     IconButton(
                       icon: _flashButtonIcon,
-                      onPressed: _onFlashButtonPressed,
+                      onPressed: _hasCameraAccess? _onFlashButtonPressed : null,
                     )
                   ],
               ),
@@ -134,6 +142,17 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 icon: Icon(Icons.settings),
                 onPressed: () => _showSettingsPage()
               )
+            ),
+            Positioned(
+              left: 0.0,
+              top: 0.0,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Offstage(
+                offstage: _hasCameraAccess,
+                child: _cameraPermissionRequestDialog()
+              )
+              
             )
           ],
         )
@@ -144,15 +163,41 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     _cameraViewController = controller;
   }
 
+  Widget _cameraPermissionRequestDialog(){ 
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "PhotoKredy needs a Camera" , 
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400, color: Colors.white)),
+          RaisedButton(
+            child: Text(
+              "Allow" , 
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+            onPressed: () {
+              PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
+                 if(permissions[PermissionGroup.camera] == PermissionStatus.granted){
+                    setState(() => _hasCameraAccess = true);
+                 }
+              });
+            }
+          )
+        ],
+      ),
+    );
+  }
+
   void _onFlashButtonPressed() async {
     Flash _flash = await _cameraViewController.getFlash();
     if(_flash == null)
-        return;
+      return;
 
     Icon _icon = Icon(Icons.flash_off);
     if(_flash == Flash.Off) {
-        _flash = Flash.Torch;
-        _icon = Icon(Icons.flash_on);
+      _flash = Flash.Torch;
+      _icon = Icon(Icons.flash_on);
     }
     else {
       _flash = Flash.Off;
