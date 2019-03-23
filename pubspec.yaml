@@ -21,6 +21,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   permission_handler: ^2.2.0 
+  fluttertoast: ^3.0.3
 
   photokredy_core:
     git: 
