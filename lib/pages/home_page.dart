@@ -13,10 +13,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:photokredy_core/photokredy_core.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'about_page.dart';
 import 'settings_page.dart';
@@ -43,12 +44,18 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     super.didChangeAppLifecycleState(state);
 
     if(state == AppLifecycleState.resumed){
-        PermissionHandler handler = PermissionHandler();
-        if(await handler.checkPermissionStatus(PermissionGroup.camera) == PermissionStatus.disabled){
-            if (Platform.isAndroid) {
-                handler.shouldShowRequestPermissionRationale(PermissionGroup.camera);
-            }
-       }
+        //Handle permissions
+        PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
+          if(permissions[PermissionGroup.camera] != PermissionStatus.granted){
+              Fluttertoast.showToast(
+                msg: "Sorry, PhotoKredy needs camera access to work!",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER); 
+
+            //Remove this activity from the stack and return to the previous activity (ignored on iOS)
+            SystemNavigator.pop();
+          }
+      });
     }
   }
 
@@ -97,7 +104,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 color: Colors.black,
             ),
             Container(
-              child: CameraView(
+              child: CameraView( 
                 onCreated: _onCameraViewCreated,
               ),
             ),
