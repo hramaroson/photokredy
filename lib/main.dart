@@ -16,11 +16,11 @@
 import "dart:async";
 
 import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:preferences/preferences.dart';
 import 'pages/home_page.dart';
 
 Future<void> main() async { 
-    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await PrefService.init(prefix: 'pref_');
     runApp(MyApp());
 }
 class MyApp extends StatefulWidget {
