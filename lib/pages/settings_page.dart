@@ -14,11 +14,28 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:preferences/preferences.dart';
 
 class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold (
-      appBar: new AppBar(title: new Text("Settings"),),
+      appBar: new AppBar(title: new Text("Settings")),
+      body: PreferencePage([
+        PreferenceTitle('General'),
+        DropdownPreference(
+          "Langage",
+          "locale",
+          desc: "Langage used by the interface",
+          defaultVal: "en",
+          values: ["en", "fr","mg"],
+          displayValues: ["English", "Français","Malagasy"]
+        ),
+        SwitchPreference(
+          "Sound", 
+          "sound",
+          desc: "Enable/disable sound",
+          defaultVal: false)
+      ]),
     );
   }
 }
