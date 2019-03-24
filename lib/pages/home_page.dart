@@ -59,29 +59,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
     if(state == AppLifecycleState.resumed){
         //Handle permissions
-<<<<<<< HEAD
        _init();
-=======
-       PermissionHandler().checkPermissionStatus(PermissionGroup.camera).then((status){
-          setState(() {
-              _hasCameraAccess = (status == PermissionStatus.granted) ;
-          });
-       });
-        
-        
-
-      //   PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
-      //     if(permissions[PermissionGroup.camera] != PermissionStatus.granted){
-      //         Fluttertoast.showToast(
-      //           msg: "Sorry, PhotoKredy needs camera access to work!",
-      //           toastLength: Toast.LENGTH_LONG,
-      //           gravity: ToastGravity.CENTER); 
-
-      //       //Remove this activity from the stack and return to the previous activity (ignored on iOS)
-      //       SystemNavigator.pop();
-      //     }
-      // });
->>>>>>> refs/remotes/origin/master
     }
   }
 
@@ -193,11 +171,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             child: Text(
               "Allow" , 
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black)),
-<<<<<<< HEAD
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-=======
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
->>>>>>> refs/remotes/origin/master
             onPressed: () {
               PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
                  if(permissions[PermissionGroup.camera] == PermissionStatus.granted){
