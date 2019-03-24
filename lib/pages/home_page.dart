@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   CameraViewController _cameraViewController;
   Icon _flashButtonIcon = Icon(Icons.flash_off);
   bool _hasCameraAccess = false;
-<<<<<<< HEAD
 
   void _init(){
     PermissionHandler().checkPermissionStatus(PermissionGroup.camera).then((status){
@@ -42,8 +41,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           setState(() => _hasCameraAccess = true);
        }
   }
-=======
->>>>>>> refs/remotes/origin/master
 
   @override
   void initState() {
