@@ -5,7 +5,7 @@ language: android
 
 env:
   global:
-    - ANDROID_API=27
+    - ANDROID_API=28
     - ANDROID_BUILD_TOOLS=28.0.3
 
 android: 
@@ -19,6 +19,7 @@ android:
   - extra-google-android-support
 
 before_install:
+    - yes | sdkmanager "platforms;android-27"
     - yes | sdkmanager "platforms;android-$ANDROID_API"
     - yes | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS"
 
