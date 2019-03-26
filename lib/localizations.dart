@@ -18,6 +18,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'l10n/messages_all.dart';
+import 'application.dart';
 
 class  AppLocalizations {
   static Future<AppLocalizations> load(Locale locale) {
@@ -34,24 +35,31 @@ class  AppLocalizations {
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
+
+  settings_page_title() => Intl.message("Settings", name: "settings_page_title");
+  settings_page_general() => Intl.message("General", name: "settings_page_general");
+  settings_page_language() => Intl.message("Language", name: "settings_page_language");
+  settings_page_sound() => Intl.message("Sound", name: "settings_page_sound"); 
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
-  const AppLocalizationsDelegate();
+  final Locale newLocale;
+
+  const AppLocalizationsDelegate({this.newLocale});
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'fr', 'mg'].contains(locale.languageCode);
+    return application.supportedLanguagesCodes.contains(locale.languageCode);
   }
 
   @override
   Future<AppLocalizations> load(Locale locale) {
-    return AppLocalizations.load(locale);
+    return AppLocalizations.load(newLocale ?? locale);
   }
 
   @override
   bool shouldReload(LocalizationsDelegate<AppLocalizations> old) {
-    return false;
+    return true;
   }
 
 }

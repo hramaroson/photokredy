@@ -16,22 +16,25 @@
 import 'package:flutter/material.dart';
 import 'package:preferences/preferences.dart';
 
+import 'package:photokredy/localizations.dart';
+import 'package:photokredy/application.dart';
+
 class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold (
-      appBar: new AppBar(title: new Text("Settings")),
+      appBar: new AppBar(title: new Text(AppLocalizations.of(context).settings_page_title())),
       body: PreferencePage([
-        PreferenceTitle('General'),
+        PreferenceTitle(AppLocalizations.of(context).settings_page_general()),
         DropdownPreference(
-          "Language",
-          "locale",
+          AppLocalizations.of(context).settings_page_language(), 
+          "language",
           desc: "Language used by the interface",
           defaultVal: "en",
-          values: ["en", "fr","mg"],
-          displayValues: ["English", "Français","Malagasy"]
+          values: application.supportedLanguagesCodes,
+          displayValues: application.supportedLanguages
         ),
         SwitchPreference(
-          "Sound", 
+          AppLocalizations.of(context).settings_page_sound(), 
           "sound",
           desc: "Enable/disable sound",
           defaultVal: false)

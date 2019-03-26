@@ -1,3 +1,23 @@
 {
-  "@@last_modified": "2019-03-26T17:47:58.175369"
+  "@@last_modified": "2019-03-27T01:00:26.168215",
+  "settings_page_title": "Settings",
+  "@settings_page_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings_page_general": "General",
+  "@settings_page_general": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings_page_language": "Language",
+  "@settings_page_language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings_page_sound": "Sound",
+  "@settings_page_sound": {
+    "type": "text",
+    "placeholders": {}
+  }
 }

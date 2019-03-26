@@ -20,6 +20,7 @@ import 'package:preferences/preferences.dart';
 import 'pages/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localizations.dart';
+import 'application.dart';
 
 Future<void> main() async { 
     await PrefService.init(prefix: 'pref_');
@@ -30,9 +31,13 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 class _MyAppState extends State<MyApp> {
+  AppLocalizationsDelegate _newLocalizationsDelegate;
+
   @override
   void initState() {
     super.initState();
+    _newLocalizationsDelegate = AppLocalizationsDelegate(newLocale: null);
+    application.onLocaleChanged = onLocaleChange;
   }
 
   @override
@@ -40,13 +45,10 @@ class _MyAppState extends State<MyApp> {
      return MaterialApp(
        title: 'PhotoKredy',
 
-       supportedLocales: [
-         const Locale('en', 'US'), //English
-         const Locale('fr', 'FR'), //French
-         const Locale('mg', 'MG'), //Malagasy
-       ],
+       supportedLocales: application.supportedLocales(),
+
        localizationsDelegates: [
-         AppLocalizationsDelegate(),
+         _newLocalizationsDelegate,
          GlobalMaterialLocalizations.delegate,
          GlobalWidgetsLocalizations.delegate,
        ],
@@ -58,5 +60,11 @@ class _MyAppState extends State<MyApp> {
        debugShowCheckedModeBanner: false,
        home: const HomePage(),
      );
+  }
+
+   void onLocaleChange(Locale locale) {
+    setState(() {
+      _newLocalizationsDelegate = AppLocalizationsDelegate(newLocale: locale);
+    });
   }
 }
