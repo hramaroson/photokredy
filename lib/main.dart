@@ -18,6 +18,8 @@ import "dart:async";
 import 'package:flutter/material.dart';
 import 'package:preferences/preferences.dart';
 import 'pages/home_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'localizations.dart';
 
 Future<void> main() async { 
     await PrefService.init(prefix: 'pref_');
@@ -37,6 +39,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
      return MaterialApp(
        title: 'PhotoKredy',
+
+       supportedLocales: [
+         const Locale('en', 'US'), //English
+         const Locale('fr', 'FR'), //French
+         const Locale('mg', 'MG'), //Malagasy
+       ],
+       localizationsDelegates: [
+         AppLocalizationsDelegate(),
+         GlobalMaterialLocalizations.delegate,
+         GlobalWidgetsLocalizations.delegate,
+       ],
 
        theme: ThemeData(
           primarySwatch: Colors.blue,

@@ -23,9 +23,9 @@ class SettingsPage extends StatelessWidget {
       body: PreferencePage([
         PreferenceTitle('General'),
         DropdownPreference(
-          "Langage",
+          "Language",
           "locale",
-          desc: "Langage used by the interface",
+          desc: "Language used by the interface",
           defaultVal: "en",
           values: ["en", "fr","mg"],
           displayValues: ["English", "Français","Malagasy"]
