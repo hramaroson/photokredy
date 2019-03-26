@@ -54,9 +54,11 @@ before_script:
   - flutter packages upgrade
   
 script:
-  - flutter build apk --debug -v 
-  - flutter build apk --release -v
+  - flutter test
 
+beforce_deploy:
+  - flutter build apk --release -v 
+  
 deploy:
     provider: releases
     file: $TRAVIS_BUILD_DIR/app/build/outputs/apk/release/*.apk
