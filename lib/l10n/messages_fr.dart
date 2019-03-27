@@ -20,11 +20,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "about" : MessageLookupByLibrary.simpleMessage("A propos"),
+    "app_title" : MessageLookupByLibrary.simpleMessage("PhotoKredy"),
+    "homepage_camera_request_dialog_allow" : MessageLookupByLibrary.simpleMessage("Autoriser"),
+    "homepage_camera_request_dialog_message" : MessageLookupByLibrary.simpleMessage("PhotoKredy a besoin de la camera"),
+    "settings" : MessageLookupByLibrary.simpleMessage("Paramètres"),
     "settings_page_general" : MessageLookupByLibrary.simpleMessage("Général"),
     "settings_page_language" : MessageLookupByLibrary.simpleMessage("Langue"),
     "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Langue de l\'interface"),
     "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Son"),
-    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Activer/désactiver le son"),
-    "settings_page_title" : MessageLookupByLibrary.simpleMessage("Paramètres")
+    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Activer/désactiver le son")
   };
 }

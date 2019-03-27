@@ -1,7 +1,13 @@
 {
     "@@last_modified": "2019-03-27T16:10:09.212995",
-    "settings_page_title": "Pitsopitsony",
-    "@settings_page_title": {
+    "@@locale": "mg",
+    "app_title": "PhotoKredy",
+    "@app_title": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "settings": "Pitsopitsony",
+    "@settings": {
       "type": "text",
       "placeholders": {}
     },
@@ -27,6 +33,21 @@
     },
     "settings_page_sound_desc": "Alefa/vonoina ny feo",
     "@settings_page_sound_desc": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "about": "Mombamomba",
+    "@about": {
+    "type": "text",
+    "placeholders": {}
+    },
+    "homepage_camera_request_dialog_allow": "Omena alalana",
+    "@homepage_camera_request_dialog_allow": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "homepage_camera_request_dialog_message": "Mila ny Camera PhotoKredy",
+    "@homepage_camera_request_dialog_message": {
       "type": "text",
       "placeholders": {}
     }

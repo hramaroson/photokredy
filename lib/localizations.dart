@@ -36,13 +36,20 @@ class  AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  settings_page_title() => Intl.message("Settings", name: "settings_page_title");
+  app_title() => Intl.message("PhotoKredy", name: "app_title");
+  settings() => Intl.message("Settings", name: "settings");
   settings_page_general() => Intl.message("General", name: "settings_page_general");
   settings_page_language() => Intl.message("Language", name: "settings_page_language");
   settings_page_language_desc() => Intl.message("Language used by the interface", 
     name: "settings_page_language_desc");
   settings_page_sound() => Intl.message("Sound", name: "settings_page_sound");
-  settings_page_sound_desc() => Intl.message("Enable/disable sound", name: "settings_page_sound_desc"); 
+  settings_page_sound_desc() => Intl.message("Enable/disable sound", 
+    name: "settings_page_sound_desc"); 
+  about() => Intl.message("About", name: "about");
+  homepage_camera_request_dialog_allow()=> Intl.message("Allow", 
+    name: "homepage_camera_request_dialog_allow"); 
+  homepage_camera_request_dialog_message() => Intl.message("PhotoKredy needs a Camera", 
+    name: "homepage_camera_request_dialog_message"); 
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

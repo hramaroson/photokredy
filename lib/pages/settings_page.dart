@@ -12,7 +12,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 import 'package:flutter/material.dart';
 import 'package:preferences/preferences.dart';
 
@@ -22,7 +21,7 @@ import 'package:photokredy/application.dart';
 class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold (
-      appBar: new AppBar(title: new Text(AppLocalizations.of(context).settings_page_title())),
+      appBar: new AppBar(title: new Text(AppLocalizations.of(context).settings())),
       body: PreferencePage([
         PreferenceTitle(AppLocalizations.of(context).settings_page_general()),
         DropdownPreference(

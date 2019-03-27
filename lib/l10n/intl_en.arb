@@ -1,7 +1,13 @@
 {
   "@@last_modified": "2019-03-27T13:25:30.664775",
-  "settings_page_title": "Settings",
-  "@settings_page_title": {
+  "@@locale": "en",
+  "app_title": "PhotoKredy",
+  "@app_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Settings",
+  "@settings": {
     "type": "text",
     "placeholders": {}
   },
@@ -27,6 +33,21 @@
   },
   "settings_page_sound_desc": "Enable/disable sound",
   "@settings_page_sound_desc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "About",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "homepage_camera_request_dialog_allow": "Allow",
+  "@homepage_camera_request_dialog_allow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "homepage_camera_request_dialog_message": "PhotoKredy needs a Camera",
+  "@homepage_camera_request_dialog_message": {
     "type": "text",
     "placeholders": {}
   }

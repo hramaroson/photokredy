@@ -16,6 +16,7 @@
 import 'package:flutter/material.dart';
 import 'package:photokredy_core/photokredy_core.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:photokredy/localizations.dart';
 
 import 'about_page.dart';
 import 'settings_page.dart';
@@ -74,26 +75,32 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text("PhotoKredy" , style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
+                child: Text(
+                  AppLocalizations.of(context).app_title() , 
+                  style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
                   decoration: new BoxDecoration(
                       color: Colors.blue
                   ),
                ),
               ListTile(
+                leading: const Icon(Icons.settings , color: Colors.blue,),
+                title: new Text(
+                  AppLocalizations.of(context).settings(), 
+                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                onTap: () {
+                  Navigator.pop(context);
+                  _showSettingsPage();
+                },
+              ),
+              ListTile(
                 leading: const Icon(Icons.info_outline , color: Colors.blue,),
-                title: Text("About", style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                title: Text(
+                  AppLocalizations.of(context).about(), 
+                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context, 
                     new MaterialPageRoute(builder: (context) => new AboutPage()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings , color: Colors.blue,),
-                title: new Text("Settings", style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showSettingsPage();
                 },
               ),
             ],
@@ -162,15 +169,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "PhotoKredy needs a Camera" , 
+            AppLocalizations.of(context).homepage_camera_request_dialog_message() , 
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400, color: Colors.white)),
-          RaisedButton(
+          RaisedButton( 
             child: Text(
-              "Allow" , 
+              AppLocalizations.of(context).homepage_camera_request_dialog_allow(), 
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black)),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-            onPressed: () {
-              PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              onPressed: () {
+                PermissionHandler().requestPermissions([PermissionGroup.camera]).then((permissions){
                  if(permissions[PermissionGroup.camera] == PermissionStatus.granted){
                     setState(() => _hasCameraAccess = true);
                  }

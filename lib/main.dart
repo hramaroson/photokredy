@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
      return MaterialApp(
-       title: 'PhotoKredy',
+       title: "PhotoKredy",
 
        supportedLocales: application.supportedLocales(),
 
