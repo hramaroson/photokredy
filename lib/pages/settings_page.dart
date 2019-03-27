@@ -28,7 +28,7 @@ class SettingsPage extends StatelessWidget {
           AppLocalizations.of(context).settings_page_language(), 
           "language",
           desc: AppLocalizations.of(context).settings_page_language_desc(),
-          defaultVal: "en",
+          defaultVal: Localizations.localeOf(context).languageCode,
           values: application.supportedLanguagesCodes,
           displayValues: application.supportedLanguages,
           onChange: (languageCode) => _onLocaleChanged(languageCode),
