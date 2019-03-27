@@ -20,11 +20,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "settings_page_general" : MessageLookupByLibrary.simpleMessage("General"),
-    "settings_page_language" : MessageLookupByLibrary.simpleMessage("Language"),
-    "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Language used by the interface"),
-    "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Sound"),
-    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Enable/disable sound"),
-    "settings_page_title" : MessageLookupByLibrary.simpleMessage("Settings")
+    "settings_page_general" : MessageLookupByLibrary.simpleMessage("Ankapobeiny"),
+    "settings_page_language" : MessageLookupByLibrary.simpleMessage("Teny"),
+    "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Teny ampiasaina"),
+    "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Feo"),
+    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Alefa/vonoina ny feo"),
+    "settings_page_title" : MessageLookupByLibrary.simpleMessage("Pitsopitsony")
   };
 }

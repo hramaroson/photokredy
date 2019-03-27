@@ -25,7 +25,7 @@
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound_desc": "Activer/desactiver le son",
+    "settings_page_sound_desc": "Activer/désactiver le son",
     "@settings_page_sound_desc": {
       "type": "text",
       "placeholders": {}

@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings_page_language" : MessageLookupByLibrary.simpleMessage("Langue"),
     "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Langue de l\'interface"),
     "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Son"),
-    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Activer/desactiver le son"),
+    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Activer/désactiver le son"),
     "settings_page_title" : MessageLookupByLibrary.simpleMessage("Paramètres")
   };
 }

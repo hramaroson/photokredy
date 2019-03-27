@@ -1,31 +1,31 @@
 {
     "@@last_modified": "2019-03-27T16:10:09.212995",
-    "settings_page_title": "Settings",
+    "settings_page_title": "Pitsopitsony",
     "@settings_page_title": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_general": "General",
+    "settings_page_general": "Ankapobeiny",
     "@settings_page_general": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_language": "Language",
+    "settings_page_language": "Teny",
     "@settings_page_language": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_language_desc": "Language used by the interface",
+    "settings_page_language_desc": "Teny ampiasaina",
     "@settings_page_language_desc": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound": "Sound",
+    "settings_page_sound": "Feo",
     "@settings_page_sound": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound_desc": "Enable/disable sound",
+    "settings_page_sound_desc": "Alefa/vonoina ny feo",
     "@settings_page_sound_desc": {
       "type": "text",
       "placeholders": {}
