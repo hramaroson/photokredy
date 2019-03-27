@@ -28,17 +28,21 @@ class SettingsPage extends StatelessWidget {
         DropdownPreference(
           AppLocalizations.of(context).settings_page_language(), 
           "language",
-          desc: "Language used by the interface",
+          desc: AppLocalizations.of(context).settings_page_language_desc(),
           defaultVal: "en",
           values: application.supportedLanguagesCodes,
-          displayValues: application.supportedLanguages
+          displayValues: application.supportedLanguages,
+          onChange: (languageCode) => _onLocaleChanged(languageCode),
         ),
         SwitchPreference(
           AppLocalizations.of(context).settings_page_sound(), 
           "sound",
-          desc: "Enable/disable sound",
+          desc: AppLocalizations.of(context).settings_page_sound_desc(),
           defaultVal: false)
       ]),
     );
+  }
+  void  _onLocaleChanged(String languageCode){
+    application.onLocaleChanged(Locale(languageCode));
   }
 }

@@ -1,0 +1,33 @@
+{
+    "@@last_modified": "2019-03-27T16:10:09.212995",
+    "settings_page_title": "Paramètres",
+    "@settings_page_title": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "settings_page_general": "Général",
+    "@settings_page_general": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "settings_page_language": "Langue",
+    "@settings_page_language": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "settings_page_language_desc": "Langue de l'interface",
+    "@settings_page_language_desc": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "settings_page_sound": "Son",
+    "@settings_page_sound": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "settings_page_sound_desc": "Activer/desactiver le son",
+    "@settings_page_sound_desc": {
+      "type": "text",
+      "placeholders": {}
+    }
+  }

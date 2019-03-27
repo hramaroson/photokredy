@@ -39,7 +39,10 @@ class  AppLocalizations {
   settings_page_title() => Intl.message("Settings", name: "settings_page_title");
   settings_page_general() => Intl.message("General", name: "settings_page_general");
   settings_page_language() => Intl.message("Language", name: "settings_page_language");
-  settings_page_sound() => Intl.message("Sound", name: "settings_page_sound"); 
+  settings_page_language_desc() => Intl.message("Language used by the interface", 
+    name: "settings_page_language_desc");
+  settings_page_sound() => Intl.message("Sound", name: "settings_page_sound");
+  settings_page_sound_desc() => Intl.message("Enable/disable sound", name: "settings_page_sound_desc"); 
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

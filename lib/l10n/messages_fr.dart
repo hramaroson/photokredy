@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a messages locale. All the
+// This is a library that provides messages for a fr locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -16,15 +16,15 @@ final _keepAnalysisHappy = Intl.defaultLocale;
 typedef MessageIfAbsent(String message_str, List args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'messages';
+  get localeName => 'fr';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "settings_page_general" : MessageLookupByLibrary.simpleMessage("General"),
-    "settings_page_language" : MessageLookupByLibrary.simpleMessage("Language"),
-    "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Language used by the interface"),
-    "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Sound"),
-    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Enable/disable sound"),
-    "settings_page_title" : MessageLookupByLibrary.simpleMessage("Settings")
+    "settings_page_general" : MessageLookupByLibrary.simpleMessage("Général"),
+    "settings_page_language" : MessageLookupByLibrary.simpleMessage("Langue"),
+    "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Langue de l\'interface"),
+    "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Son"),
+    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Activer/desactiver le son"),
+    "settings_page_title" : MessageLookupByLibrary.simpleMessage("Paramètres")
   };
 }
