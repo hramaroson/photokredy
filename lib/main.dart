@@ -36,7 +36,12 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _newLocalizationsDelegate = AppLocalizationsDelegate(newLocale: null);
+    
+    String languageCode = PrefService.getString("language");
+    _newLocalizationsDelegate = AppLocalizationsDelegate(
+      newLocale: application.supportedLanguagesCodes.contains(
+        languageCode)? Locale(languageCode) : null);
+
     application.onLocaleChanged = onLocaleChange;
   }
 
