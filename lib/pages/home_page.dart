@@ -143,16 +143,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 onPressed: () => _showSettingsPage()
               )
             ),
-            Positioned(
-              left: 0.0,
-              top: 0.0,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Offstage(
-                offstage: _hasCameraAccess,
+            Offstage(
+              offstage: _hasCameraAccess,
+              child: Center (
                 child: _cameraPermissionRequestDialog()
               )
-              
+            ),
+            Offstage(
+              offstage: !_hasCameraAccess,
+              child:  new CustomPaint()
             )
           ],
         )
@@ -165,6 +164,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   Widget _cameraPermissionRequestDialog(){ 
     return Container(
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
