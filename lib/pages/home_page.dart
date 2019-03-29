@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:photokredy_core/photokredy_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photokredy/localizations.dart';
+import 'widgets/camera_focus_widget.dart';
 
 import 'about_page.dart';
 import 'settings_page.dart';
@@ -24,7 +25,7 @@ import 'settings_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage();
   @override
-  _HomePageState createState() => new _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver { 
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -77,16 +78,16 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               DrawerHeader(
                 child: Text(
                   AppLocalizations.of(context).app_title() , 
-                  style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
-                  decoration: new BoxDecoration(
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
+                  decoration: BoxDecoration(
                       color: Colors.blue
                   ),
                ),
               ListTile(
                 leading: const Icon(Icons.settings , color: Colors.blue,),
-                title: new Text(
+                title: Text(
                   AppLocalizations.of(context).settings(), 
-                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
                   _showSettingsPage();
@@ -96,11 +97,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 leading: const Icon(Icons.info_outline , color: Colors.blue,),
                 title: Text(
                   AppLocalizations.of(context).about(), 
-                  style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, 
-                    new MaterialPageRoute(builder: (context) => new AboutPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
                 },
               ),
             ],
@@ -151,7 +151,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
             Offstage(
               offstage: !_hasCameraAccess,
-              child:  new CustomPaint()
+                child: CustomPaint(
+                  child: Container (
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height
+                  ),
+                  foregroundPainter: CameraFocusWidget(),
+                )
             )
           ],
         )
@@ -210,6 +216,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   void _showSettingsPage(){
-    Navigator.push(context, new MaterialPageRoute(builder: (context) => new SettingsPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
   }
 }
