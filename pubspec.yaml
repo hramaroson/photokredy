@@ -1,7 +1,7 @@
 name: photokredy
 description: Mobile app providing prepaid phone card fast and easy scanning
 
-version: 0.1.0+1
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -22,7 +22,8 @@ dependencies:
 
   photokredy_core:
     git: 
-      url: https://github.com/hramaroson/photokredy_core.git
+      url: https://github.com/hramaroson/photokredy_core.git   
+      ref: with-FotoApparat    
 
 dev_dependencies:
   flutter_test:

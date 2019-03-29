@@ -37,11 +37,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     PermissionHandler().checkPermissionStatus(PermissionGroup.camera).then((status){
          setState(() => _hasCameraAccess = (status == PermissionStatus.granted));
     });
-
-    if(_cameraViewController != null && _hasCameraAccess) { 
-          _cameraViewController.open(); //ensure Camera is opened
-          setState(() => _hasCameraAccess = true);
-       }
   }
 
   @override
