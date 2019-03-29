@@ -16,47 +16,92 @@
 import 'package:flutter/material.dart';
 
 class CameraFocusWidget extends CustomPainter {
+  bool _continuousFocusMoving = true;
+  int _continuousFocusMovingMs = 0;
+
   @override
   void paint(Canvas canvas, Size size) {
+    _doFocusAnimation(canvas,size, DateTime.now().microsecondsSinceEpoch);
+  }
+  void _doFocusAnimation(Canvas canvas, Size size, int timeMs){
+    bool isAnimated = false;
+
     Paint line = Paint()
         ..color = Colors.white
         ..strokeCap = StrokeCap.round
         ..style = PaintingStyle.stroke
+        ..strokeJoin = StrokeJoin.round
         ..strokeWidth = 2.0;
-    double cx = size.width/2.0;
-    double cy= size.height/3.0; 
+    double centerX = size.width/2.0;
+    double centerY = size.height/3.0; 
 
-    double roi_rw = size.width /2.0 - 10.0;
-    double roi_rh = roi_rw / 2.2;
-    Rect p_rect = Rect.fromLTRB(cx - roi_rw, cy - roi_rh, cx + roi_rw, cy + roi_rh);
+    double roiRadiusWidth = size.width / 2.0 - 10.0;
+    double roiRadiusHeight = roiRadiusWidth / 2.2;
+    Rect paintRect = Rect.fromLTRB(centerX - roiRadiusWidth, centerY - roiRadiusHeight,
+     centerX + roiRadiusWidth, centerY + roiRadiusHeight);
 
-    double length = 0.08 * p_rect.width;
+    if(_continuousFocusMoving){
+      isAnimated = true;
+      int dt = timeMs - _continuousFocusMovingMs;
+      final int length = 1000;
+      if( dt <=length) {
+        double frac = dt.toDouble() / length.toDouble();
+        double roiRadiusMaxWidth = roiRadiusWidth * 1.05;
+        double roiRadiusMaxHeight = roiRadiusHeight * 1.05;
+        double alpha = 0.0;
+        if(frac < 0.5){
+          alpha = frac * 2.0;
+          roiRadiusWidth = (1.0 - alpha) * roiRadiusWidth + alpha * roiRadiusMaxWidth;
+          roiRadiusHeight = (1.0 - alpha) * roiRadiusHeight + alpha * roiRadiusMaxHeight;
+        }
+        else {
+          alpha = (frac - 0.5) * 2.0; 
+          roiRadiusWidth = (1.0 - alpha) * roiRadiusMaxWidth + alpha + roiRadiusWidth;
+          roiRadiusHeight = (1.0 - alpha) * roiRadiusMaxHeight + alpha * roiRadiusHeight;
+        }
+        paintRect = Rect.fromLTRB(centerX - roiRadiusWidth, centerY - roiRadiusHeight , 
+        centerX + roiRadiusWidth, centerY + roiRadiusHeight);
+      }
+      else {
+        isAnimated = false;
+        clearContinuousFocusMove();
+      }
+    }
+    if(isAnimated)
+      line.color = Colors.yellowAccent;
+
+    double length = 0.07 * paintRect.width;
 
     //horizontal lines
-    canvas.drawLine(Offset (p_rect.left, p_rect.top),
-                    Offset (p_rect.left + length, p_rect.top), line);
-    canvas.drawLine(Offset (p_rect.right, p_rect.top),
-                    Offset (p_rect.right - length, p_rect.top), line);
-    canvas.drawLine(Offset (p_rect.left, p_rect.bottom),
-                    Offset (p_rect.left + length, p_rect.bottom),line);
-    canvas.drawLine(Offset (p_rect.right, p_rect.bottom),
-                    Offset (p_rect.right - length, p_rect.bottom), line);
+    canvas.drawLine(Offset (paintRect.left, paintRect.top),
+                    Offset (paintRect.left + length, paintRect.top), line);
+    canvas.drawLine(Offset (paintRect.right, paintRect.top),
+                    Offset (paintRect.right - length, paintRect.top), line);
+    canvas.drawLine(Offset (paintRect.left, paintRect.bottom),
+                    Offset (paintRect.left + length, paintRect.bottom),line);
+    canvas.drawLine(Offset (paintRect.right, paintRect.bottom),
+                    Offset (paintRect.right - length, paintRect.bottom), line);
 
     //vertical lines
-    canvas.drawLine(Offset (p_rect.left, p_rect.top),
-                    Offset (p_rect.left, p_rect.top + length), line);
-    canvas.drawLine(Offset (p_rect.right, p_rect.top),
-                    Offset (p_rect.right, p_rect.top + length), line);
-    canvas.drawLine(Offset (p_rect.left, p_rect.bottom),
-                    Offset (p_rect.left, p_rect.bottom - length), line);
-    canvas.drawLine(Offset (p_rect.right, p_rect.bottom),
-                    Offset (p_rect.right, p_rect.bottom - length), line);
+    canvas.drawLine(Offset (paintRect.left, paintRect.top),
+                    Offset (paintRect.left, paintRect.top + length), line);
+    canvas.drawLine(Offset (paintRect.right, paintRect.top),
+                    Offset (paintRect.right, paintRect.top + length), line);
+    canvas.drawLine(Offset (paintRect.left, paintRect.bottom),
+                    Offset (paintRect.left, paintRect.bottom - length), line);
+    canvas.drawLine(Offset (paintRect.right, paintRect.bottom),
+                    Offset (paintRect.right, paintRect.bottom - length), line);
+  }
 
-    
+  void clearContinuousFocusMove(){
+    if(_continuousFocusMoving){
+        _continuousFocusMoving = false;
+        _continuousFocusMovingMs = 0;
+    }
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    return oldDelegate != this;
+    return true;
   }
 }
