@@ -146,13 +146,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
             Offstage(
               offstage: !_hasCameraAccess,
-                child: CustomPaint(
-                  child: Container (
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height
-                  ),
-                  foregroundPainter: CameraFocusWidget(),
-                )
+              child: Container(
+                child: CameraFocusWidget()
+              )
             )
           ],
         )
