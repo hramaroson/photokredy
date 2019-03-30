@@ -22,8 +22,7 @@ dependencies:
 
   photokredy_core:
     git: 
-      url: https://github.com/hramaroson/photokredy_core.git   
-      ref: with-FotoApparat    
+      url: https://github.com/hramaroson/photokredy_core.git      
 
 dev_dependencies:
   flutter_test:
