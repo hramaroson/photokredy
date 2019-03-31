@@ -21,33 +21,82 @@ class CameraFocusWidget extends StatefulWidget {
 }
 
 class _CameraFocusWidgetState extends State<CameraFocusWidget> 
-  with SingleTickerProviderStateMixin  {
+  with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   AnimationController _controller;
-  Animation<double> _animation;
+  Animation<double> _animation; 
+
   @override
   void initState(){
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
 
-    _controller = AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInBack)
-      ..addStatusListener((status) {
-        setState(() {});
-      });
-    _controller.forward(); //initial animation
+    _init();
   }
+
+  void _init(){
+     if( _controller == null) {
+       _controller = AnimationController(duration: const Duration(milliseconds:  500), vsync: this);
+     }
+    _controller.reset();
+    _animation = Tween<double>(
+        begin: 0.0,
+        end: 1.0).animate(
+          CurvedAnimation(
+            parent:_controller, 
+            curve: Curves.easeIn
+          )
+        )
+    ..addStatusListener(_handleAnimationStatus);
+     _controller.forward();
+  }
+
+  void _handleAnimationStatus(AnimationStatus status){
+    if (status == AnimationStatus.completed) {
+        _animation.removeStatusListener(_handleAnimationStatus);
+        _controller.reset();
+
+        _animation = Tween<double>(
+          begin: 1.0,
+          end: 0.0).animate(
+            CurvedAnimation(
+              parent:_controller, 
+              curve: Curves.easeIn
+            )
+        );
+        _controller.forward();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    if(state == AppLifecycleState.resumed){
+       _init();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      builder: _buildAnimation,
+      animation: _controller 
+    );
+  }
+
+  Widget _buildAnimation(BuildContext context, Widget child){
+    Size size = MediaQuery.of(context).size;
     return CustomPaint(
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height
+        width: size.width,
+        height: size.height
       ),
       foregroundPainter: CameraFocusWidgetPainter(_animation),
     );
   }
+
   @override
   void dispose(){
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 }
@@ -57,8 +106,8 @@ class CameraFocusWidgetPainter extends CustomPainter {
   CameraFocusWidgetPainter(this._animation);
 
   @override
-   void paint(Canvas canvas, Size size) {
-     Paint line = Paint()
+  void paint(Canvas canvas, Size size) {
+    Paint line = Paint()
       ..color = Colors.white
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
@@ -71,9 +120,9 @@ class CameraFocusWidgetPainter extends CustomPainter {
     double roiRadiusWidth = size.width / 2.0 - 10.0;
     double roiRadiusHeight = roiRadiusWidth / 2.2;
 
-    double delta = 0.05 * _animation.value;
-    roiRadiusWidth += roiRadiusWidth * delta;
-    roiRadiusHeight += roiRadiusHeight * delta;
+    double delta = 1 +  0.07 * _animation.value;
+    roiRadiusWidth *= delta;
+    roiRadiusHeight *= delta;
     Rect paintRect = Rect.fromLTRB(centerX - roiRadiusWidth, centerY - roiRadiusHeight,
       centerX + roiRadiusWidth, centerY + roiRadiusHeight);
     
@@ -83,28 +132,28 @@ class CameraFocusWidgetPainter extends CustomPainter {
     double length = 0.07 * paintRect.width;
 
     //horizontal lines
-    canvas.drawLine(Offset (paintRect.left, paintRect.top),
-                    Offset (paintRect.left + length, paintRect.top), line);
-    canvas.drawLine(Offset (paintRect.right, paintRect.top),
-                    Offset (paintRect.right - length, paintRect.top), line);
-    canvas.drawLine(Offset (paintRect.left, paintRect.bottom),
-                    Offset (paintRect.left + length, paintRect.bottom),line);
-    canvas.drawLine(Offset (paintRect.right, paintRect.bottom),
-                    Offset (paintRect.right - length, paintRect.bottom), line);
+    canvas.drawLine(Offset(paintRect.left, paintRect.top),
+                    Offset(paintRect.left + length, paintRect.top), line);
+    canvas.drawLine(Offset(paintRect.right, paintRect.top),
+                    Offset(paintRect.right - length, paintRect.top), line);
+    canvas.drawLine(Offset(paintRect.left, paintRect.bottom),
+                    Offset(paintRect.left + length, paintRect.bottom),line);
+    canvas.drawLine(Offset(paintRect.right, paintRect.bottom),
+                    Offset(paintRect.right - length, paintRect.bottom), line);
 
     //vertical lines
-    canvas.drawLine(Offset (paintRect.left, paintRect.top),
-                    Offset (paintRect.left, paintRect.top + length), line);
-    canvas.drawLine(Offset (paintRect.right, paintRect.top),
-                    Offset (paintRect.right, paintRect.top + length), line);
-    canvas.drawLine(Offset (paintRect.left, paintRect.bottom),
-                    Offset (paintRect.left, paintRect.bottom - length), line);
-    canvas.drawLine(Offset (paintRect.right, paintRect.bottom),
-                    Offset (paintRect.right, paintRect.bottom - length), line);
+    canvas.drawLine(Offset(paintRect.left, paintRect.top),
+                    Offset(paintRect.left, paintRect.top + length), line);
+    canvas.drawLine(Offset(paintRect.right, paintRect.top),
+                    Offset(paintRect.right, paintRect.top + length), line);
+    canvas.drawLine(Offset(paintRect.left, paintRect.bottom),
+                    Offset(paintRect.left, paintRect.bottom - length), line);
+    canvas.drawLine(Offset(paintRect.right, paintRect.bottom),
+                    Offset(paintRect.right, paintRect.bottom - length), line);
    }
 
-   @override
-   bool shouldRepaint(CustomPainter oldDelegate) {
-     return true;
-   }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
 }
