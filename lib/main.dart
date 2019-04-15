@@ -26,10 +26,12 @@ Future<void> main() async {
     await PrefService.init(prefix: 'pref_');
     runApp(MyApp());
 }
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   AppLocalizationsDelegate _newLocalizationsDelegate;
 
@@ -67,7 +69,7 @@ class _MyAppState extends State<MyApp> {
      );
   }
 
-   void onLocaleChange(Locale locale) {
+  void onLocaleChange(Locale locale) {
     setState(() {
       _newLocalizationsDelegate = AppLocalizationsDelegate(newLocale: locale);
     });
