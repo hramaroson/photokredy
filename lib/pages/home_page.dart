@@ -22,6 +22,7 @@ import 'widgets/camera_focus_widget.dart';
 import 'about_page.dart';
 import 'settings_page.dart';
 
+
 class HomePage extends StatefulWidget {
   const HomePage();
   @override
@@ -29,10 +30,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver { 
-  CameraViewController _cameraViewController;
+  CameraController _cameraController;
   Icon _flashButtonIcon = Icon(Icons.flash_off);
   bool _hasCameraAccess = false;
-
+  
   void _init(){
     PermissionHandler().checkPermissionStatus(PermissionGroup.camera).then((status){
          setState(() => _hasCameraAccess = (status == PermissionStatus.granted));
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             Offstage(
               offstage: !_hasCameraAccess,
               child: Container(
-                child: CameraFocusWidget()
+                child: CameraFocusWidget(),
               )
             )
           ],
@@ -155,8 +156,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 
-  void _onCameraViewCreated(CameraViewController controller){
-    _cameraViewController = controller;
+  void _onCameraViewCreated(CameraController controller){
+    _cameraController = controller;
+    _cameraController.addCameraEventListener(CameraEventListener(
+      onOpened: _onCameraOpened
+    ));
   }
 
   Widget _cameraPermissionRequestDialog(){ 
@@ -186,8 +190,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 
+  void _onCameraOpened() {
+    setState(() => CameraFocusWidget.status = CameraFocusWidgetStatus.Opening);
+  }
+
   void _onFlashButtonPressed() async {
-    Flash _flash = await _cameraViewController.getFlash();
+    Flash _flash = await _cameraController.getFlash();
     if(_flash == null)
       return;
 
@@ -201,7 +209,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       _icon = Icon(Icons.flash_off);
     }
     
-    if(await _cameraViewController.setFlash(_flash)) {
+    if(await _cameraController.setFlash(_flash)) {
       setState(() => _flashButtonIcon = _icon);
     }
   }

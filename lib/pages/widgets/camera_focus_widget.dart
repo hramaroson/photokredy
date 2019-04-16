@@ -15,68 +15,84 @@
 
 import 'package:flutter/material.dart';
 
+enum CameraFocusWidgetStatus {
+    None,
+    Idle,
+    Opening,
+    Focusing,
+}
+
 class CameraFocusWidget extends StatefulWidget {
-  const CameraFocusWidget();
-   _CameraFocusWidgetState createState() => _CameraFocusWidgetState();
+  static CameraFocusWidgetStatus status = CameraFocusWidgetStatus.Opening;
+  
+
+  CameraFocusWidget(); 
+
+  _CameraFocusWidgetState createState() => _CameraFocusWidgetState();
 }
 
 class _CameraFocusWidgetState extends State<CameraFocusWidget> 
-  with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  with SingleTickerProviderStateMixin {
+  CameraFocusWidgetStatus _status = CameraFocusWidgetStatus.None;
+
   AnimationController _controller;
   Animation<double> _animation; 
-
+  
   @override
   void initState(){
-    WidgetsBinding.instance.addObserver(this);
     super.initState();
 
-    _init();
+    _controller = AnimationController(duration: const Duration(seconds:  1), vsync: this);
   }
 
   void _init(){
-     if( _controller == null) {
-       _controller = AnimationController(duration: const Duration(milliseconds:  500), vsync: this);
-     }
-    _controller.reset();
-    _animation = Tween<double>(
-        begin: 0.0,
-        end: 1.0).animate(
-          CurvedAnimation(
-            parent:_controller, 
-            curve: Curves.easeIn
-          )
-        )
-    ..addStatusListener(_handleAnimationStatus);
-     _controller.forward();
-  }
+    if(CameraFocusWidget.status == CameraFocusWidgetStatus.Opening 
+        && _status != CameraFocusWidgetStatus.Opening ){
+           _controller.reset();
 
-  void _handleAnimationStatus(AnimationStatus status){
-    if (status == AnimationStatus.completed) {
-        _animation.removeStatusListener(_handleAnimationStatus);
-        _controller.reset();
-
-        _animation = Tween<double>(
-          begin: 1.0,
-          end: 0.0).animate(
+          _animation = Tween<double> (
+          begin: 0.0,
+          end: 1.0).animate(
             CurvedAnimation(
-              parent:_controller, 
+              parent: _controller,
               curve: Curves.easeIn
-            )
-        );
+              )
+          )
+        ..addStatusListener(_handleAnimationStatus);
+        
+        _status = CameraFocusWidgetStatus.Opening;
         _controller.forward();
     }
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    super.didChangeAppLifecycleState(state);
-    if(state == AppLifecycleState.resumed){
-       _init();
+  void _handleAnimationStatus(AnimationStatus status){
+    if (status == AnimationStatus.completed){
+
+     CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
+     _status = CameraFocusWidgetStatus.Idle;
     }
   }
+  // void _handleAnimationStatus(AnimationStatus status){
+  //   if (status == AnimationStatus.completed) {
+  //       _animation.removeStatusListener(_handleAnimationStatus);
+  //       _controller.reset();
+
+  //       _animation = Tween<double>(
+  //         begin: 1.0,
+  //         end: 0.0).animate(
+  //           CurvedAnimation(
+  //             parent:_controller, 
+  //             curve: Curves.easeIn
+  //           )
+  //       );
+  //       _controller.forward();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    _init();
+
     return AnimatedBuilder(
       builder: _buildAnimation,
       animation: _controller 
@@ -90,7 +106,7 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
         width: size.width,
         height: size.height
       ),
-      foregroundPainter: CameraFocusWidgetPainter(_animation),
+      foregroundPainter: CameraFocusWidgetPainter(_animation, _status),
     );
   }
 
@@ -103,11 +119,46 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
 
 class CameraFocusWidgetPainter extends CustomPainter {
   Animation<double> _animation;
-  CameraFocusWidgetPainter(this._animation);
+  final CameraFocusWidgetStatus _status;
+
+  CameraFocusWidgetPainter(this._animation, this._status);
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint line = Paint()
+    switch(_status) {
+       case CameraFocusWidgetStatus.Idle:
+          _drawOnIdle(canvas, size);
+          break;
+       case CameraFocusWidgetStatus.Opening:
+          _drawOpeningAnimation(canvas, size);
+          break;
+       default: 
+          break;
+    }
+  }
+  void _drawOnIdle(Canvas canvas, Size size){
+    Paint pen = Paint()
+      ..color = Colors.white
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 2.0;
+
+    double centerX = size.width/2.0;
+    double centerY = size.height/3.0; 
+
+    double roiRadiusWidth = size.width / 2.0 - 10.0;
+    double roiRadiusHeight = roiRadiusWidth / 2.2;
+
+    Rect paintRect = Rect.fromLTRB(centerX - roiRadiusWidth, centerY - roiRadiusHeight,
+      centerX + roiRadiusWidth, centerY + roiRadiusHeight);
+
+    _drawFocusMark(canvas,paintRect,pen);
+
+  }
+
+  void _drawOpeningAnimation(Canvas canvas, Size size){
+    Paint pen = Paint()
       ..color = Colors.white
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
@@ -127,30 +178,34 @@ class CameraFocusWidgetPainter extends CustomPainter {
       centerX + roiRadiusWidth, centerY + roiRadiusHeight);
     
     if(!_animation.isCompleted)
-       line.color = Colors.lightGreen;
+       pen.color = Colors.lightGreen;
 
-    double length = 0.07 * paintRect.width;
+    _drawFocusMark(canvas,paintRect,pen);
+  }
+
+  void _drawFocusMark(Canvas canvas, Rect rect, Paint pen){
+     double length = 0.07 * rect.width;
 
     //horizontal lines
-    canvas.drawLine(Offset(paintRect.left, paintRect.top),
-                    Offset(paintRect.left + length, paintRect.top), line);
-    canvas.drawLine(Offset(paintRect.right, paintRect.top),
-                    Offset(paintRect.right - length, paintRect.top), line);
-    canvas.drawLine(Offset(paintRect.left, paintRect.bottom),
-                    Offset(paintRect.left + length, paintRect.bottom),line);
-    canvas.drawLine(Offset(paintRect.right, paintRect.bottom),
-                    Offset(paintRect.right - length, paintRect.bottom), line);
+    canvas.drawLine(Offset(rect.left, rect.top),
+                    Offset(rect.left + length, rect.top), pen);
+    canvas.drawLine(Offset(rect.right, rect.top),
+                    Offset(rect.right - length, rect.top), pen);
+    canvas.drawLine(Offset(rect.left, rect.bottom),
+                    Offset(rect.left + length, rect.bottom),pen);
+    canvas.drawLine(Offset(rect.right, rect.bottom),
+                    Offset(rect.right - length, rect.bottom), pen);
 
     //vertical lines
-    canvas.drawLine(Offset(paintRect.left, paintRect.top),
-                    Offset(paintRect.left, paintRect.top + length), line);
-    canvas.drawLine(Offset(paintRect.right, paintRect.top),
-                    Offset(paintRect.right, paintRect.top + length), line);
-    canvas.drawLine(Offset(paintRect.left, paintRect.bottom),
-                    Offset(paintRect.left, paintRect.bottom - length), line);
-    canvas.drawLine(Offset(paintRect.right, paintRect.bottom),
-                    Offset(paintRect.right, paintRect.bottom - length), line);
-   }
+    canvas.drawLine(Offset(rect.left, rect.top),
+                    Offset(rect.left, rect.top + length), pen);
+    canvas.drawLine(Offset(rect.right, rect.top),
+                    Offset(rect.right, rect.top + length), pen);
+    canvas.drawLine(Offset(rect.left, rect.bottom),
+                    Offset(rect.left, rect.bottom - length), pen);
+    canvas.drawLine(Offset(rect.right, rect.bottom),
+                    Offset(rect.right, rect.bottom - length), pen);
+  }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
