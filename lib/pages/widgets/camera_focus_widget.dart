@@ -42,6 +42,7 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
   void initState(){
     super.initState();
 
+    //prebuild AnimationController
     _controller = AnimationController(duration: const Duration(seconds:  1), vsync: this);
   }
 
@@ -55,7 +56,7 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
           end: 1.0).animate(
             CurvedAnimation(
               parent: _controller,
-              curve: Curves.easeIn
+              curve: Curves.decelerate
               )
           )
         ..addStatusListener(_handleAnimationStatus);
@@ -68,26 +69,11 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
   void _handleAnimationStatus(AnimationStatus status){
     if (status == AnimationStatus.completed){
 
+     //get back to idle state
      CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
      _status = CameraFocusWidgetStatus.Idle;
     }
   }
-  // void _handleAnimationStatus(AnimationStatus status){
-  //   if (status == AnimationStatus.completed) {
-  //       _animation.removeStatusListener(_handleAnimationStatus);
-  //       _controller.reset();
-
-  //       _animation = Tween<double>(
-  //         begin: 1.0,
-  //         end: 0.0).animate(
-  //           CurvedAnimation(
-  //             parent:_controller, 
-  //             curve: Curves.easeIn
-  //           )
-  //       );
-  //       _controller.forward();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,10 +118,11 @@ class CameraFocusWidgetPainter extends CustomPainter {
        case CameraFocusWidgetStatus.Opening:
           _drawOpeningAnimation(canvas, size);
           break;
-       default: 
+       default: //nothing is drawn on screen when no focus state is set
           break;
     }
   }
+  
   void _drawOnIdle(Canvas canvas, Size size){
     Paint pen = Paint()
       ..color = Colors.white
@@ -171,7 +158,7 @@ class CameraFocusWidgetPainter extends CustomPainter {
     double roiRadiusWidth = size.width / 2.0 - 10.0;
     double roiRadiusHeight = roiRadiusWidth / 2.2;
 
-    double delta = 1 +  0.07 * _animation.value;
+    double delta = _animation.value;
     roiRadiusWidth *= delta;
     roiRadiusHeight *= delta;
     Rect paintRect = Rect.fromLTRB(centerX - roiRadiusWidth, centerY - roiRadiusHeight,
@@ -184,7 +171,7 @@ class CameraFocusWidgetPainter extends CustomPainter {
   }
 
   void _drawFocusMark(Canvas canvas, Rect rect, Paint pen){
-     double length = 0.07 * rect.width;
+    double length = 0.07 * rect.width;
 
     //horizontal lines
     canvas.drawLine(Offset(rect.left, rect.top),
