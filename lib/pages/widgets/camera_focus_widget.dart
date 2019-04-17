@@ -122,14 +122,19 @@ class CameraFocusWidgetPainter extends CustomPainter {
           break;
     }
   }
-  
-  void _drawOnIdle(Canvas canvas, Size size){
+
+  Paint _pen(){
     Paint pen = Paint()
       ..color = Colors.white
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
       ..strokeJoin = StrokeJoin.round
       ..strokeWidth = 2.0;
+      return pen;
+  }
+  
+  void _drawOnIdle(Canvas canvas, Size size){
+    Paint pen = _pen();
 
     double centerX = size.width/2.0;
     double centerY = size.height/3.0; 
@@ -145,12 +150,7 @@ class CameraFocusWidgetPainter extends CustomPainter {
   }
 
   void _drawOpeningAnimation(Canvas canvas, Size size){
-    Paint pen = Paint()
-      ..color = Colors.white
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 2.0;
+    Paint pen = _pen();
 
     double centerX = size.width/2.0;
     double centerY = size.height/3.0; 
