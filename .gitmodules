@@ -1,0 +1,3 @@
+[submodule "photokredy_core"]
+	path = photokredy_core
+	url = https://github.com/hramaroson/photokredy_core
