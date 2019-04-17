@@ -196,9 +196,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   void _onFlashButtonPressed() async {
     Flash _flash = await _cameraController.getFlash();
-    if(_flash == null)
-      return;
-
+    
     Icon _icon = Icon(Icons.flash_off);
     if(_flash == Flash.Off) {
       _flash = Flash.Torch;
@@ -209,9 +207,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       _icon = Icon(Icons.flash_off);
     }
     
-    if(await _cameraController.setFlash(_flash)) {
-      setState(() => _flashButtonIcon = _icon);
-    }
+    _cameraController.setFlash(_flash);
+    setState(() => _flashButtonIcon = _icon);
   }
 
   void _showSettingsPage(){
