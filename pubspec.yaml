@@ -21,8 +21,7 @@ dependencies:
   intl_translation: ^0.17.3
 
   photokredy_core:
-    git: 
-      url: photokredy_core    
+    path: photokredy_core      
 
 dev_dependencies:
   flutter_test:
