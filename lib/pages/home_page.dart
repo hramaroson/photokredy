@@ -159,7 +159,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   void _onCameraViewCreated(CameraController controller){
     _cameraController = controller;
     _cameraController.addCameraEventListener(CameraEventListener(
-      onOpened: _onCameraOpened
+      onOpened: _onCameraOpened,
+      onClosed: _onCameraClosed 
     ));
   }
 
@@ -192,6 +193,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   void _onCameraOpened() {
     setState(() => CameraFocusWidget.status = CameraFocusWidgetStatus.Opening);
+  }
+
+  void _onCameraClosed(){
+    CameraFocusWidget.status = CameraFocusWidgetStatus.None;
   }
 
   void _onFlashButtonPressed() async {
