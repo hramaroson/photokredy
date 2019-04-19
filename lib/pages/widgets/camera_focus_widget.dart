@@ -23,7 +23,7 @@ enum CameraFocusWidgetStatus {
 }
 
 class CameraFocusWidget extends StatefulWidget {
-  static CameraFocusWidgetStatus status = CameraFocusWidgetStatus.Opening;
+  static CameraFocusWidgetStatus status = CameraFocusWidgetStatus.None;
   
 
   CameraFocusWidget(); 
@@ -43,7 +43,7 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
     super.initState();
 
     //prebuild AnimationController
-    _controller = AnimationController(duration: const Duration(seconds:  1), vsync: this);
+    _controller = AnimationController(duration: const Duration(milliseconds:  800), vsync: this);
   }
 
   void _init(){
@@ -63,6 +63,8 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
         
         _status = CameraFocusWidgetStatus.Opening;
         _controller.forward();
+    } else if(CameraFocusWidget.status == CameraFocusWidgetStatus.None){
+       _status = CameraFocusWidget.status;
     }
   }
 
