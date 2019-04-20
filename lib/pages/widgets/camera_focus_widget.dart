@@ -43,29 +43,43 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
     super.initState();
 
     //prebuild AnimationController
-    _controller = AnimationController(duration: const Duration(milliseconds:  800), vsync: this);
+    _controller = AnimationController(duration: const Duration(milliseconds:  700), vsync: this);
   }
 
   void _init(){
-    if(CameraFocusWidget.status == CameraFocusWidgetStatus.Opening 
-        && _status != CameraFocusWidgetStatus.Opening ){
-           _controller.reset();
+    //skip init if opening animation is already started
+    bool animated = (CameraFocusWidget.status == CameraFocusWidgetStatus.Opening 
+      && _status != CameraFocusWidgetStatus.Opening) 
 
-          _animation = Tween<double> (
-          begin: 0.0,
-          end: 1.0).animate(
-            CurvedAnimation(
-              parent: _controller,
-              curve: Curves.decelerate
-              )
-          )
-        ..addStatusListener(_handleAnimationStatus);
-        
-        _status = CameraFocusWidgetStatus.Opening;
-        _controller.forward();
-    } else if(CameraFocusWidget.status == CameraFocusWidgetStatus.None){
+    //skip init if focusing animation is already started (or opening animation while focusing)
+    || (CameraFocusWidget.status == CameraFocusWidgetStatus.Focusing 
+      && _status != CameraFocusWidgetStatus.Focusing 
+      && _status != CameraFocusWidgetStatus.Opening);
+
+
+    if( animated ) { 
+       _initAnimation();
+    } 
+    else if(CameraFocusWidget.status == CameraFocusWidgetStatus.None){
        _status = CameraFocusWidget.status;
     }
+  }
+
+  void _initAnimation(){
+     _controller.reset();
+
+    _animation = Tween<double> (
+      begin: 0.0,
+      end: 1.0).animate(
+      CurvedAnimation(
+          parent: _controller,
+          curve: Curves.decelerate
+          )
+      )
+      ..addStatusListener(_handleAnimationStatus);
+        
+      _status = CameraFocusWidget.status;
+      _controller.forward();
   }
 
   void _handleAnimationStatus(AnimationStatus status){
