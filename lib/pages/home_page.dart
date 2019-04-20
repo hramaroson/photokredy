@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   void _onCameraClosed(){
-    CameraFocusWidget.status = CameraFocusWidgetStatus.None;
+    setState(() => CameraFocusWidget.status = CameraFocusWidgetStatus.None);
   }
 
   void _onFlashButtonPressed() async {
