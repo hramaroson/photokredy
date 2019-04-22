@@ -57,7 +57,7 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
       && _status != CameraFocusWidgetStatus.Opening);
 
 
-    if( animated ) { 
+    if(animated){ 
        _initAnimation();
     } 
     else if(CameraFocusWidget.status == CameraFocusWidgetStatus.None){
@@ -67,7 +67,10 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
 
   void _initAnimation(){
      _controller.reset();
-
+    if(CameraFocusWidget.status == CameraFocusWidgetStatus.Focusing){
+        //modify animation duration for focus animation
+        _controller.duration = Duration(milliseconds: 400); 
+    }
     _animation = Tween<double> (
       begin: 0.0,
       end: 1.0).animate(
@@ -83,16 +86,27 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
   }
 
   void _handleAnimationStatus(AnimationStatus status){
-    if (status == AnimationStatus.completed){
-
-     //get back to idle state
-     CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
-     _status = CameraFocusWidgetStatus.Idle;
+    if (status == AnimationStatus.completed) {
+      if(_status == CameraFocusWidgetStatus.Focusing) {
+         _controller.reverse(); //bring the focus marker to its idle  position
+      } else {
+         //get back to idle state
+          CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
+          _status = CameraFocusWidgetStatus.Idle;
+      }
+          
+    }
+    else if(status == AnimationStatus.dismissed) {
+      if(_status == CameraFocusWidgetStatus.Focusing){
+        //get back to idle state
+        CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
+        _status = CameraFocusWidgetStatus.Idle;
+      }
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     _init();
 
     return AnimatedBuilder(
@@ -119,14 +133,14 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
   }
 }
 
-class CameraFocusWidgetPainter extends CustomPainter {
+class CameraFocusWidgetPainter extends CustomPainter{
   Animation<double> _animation;
   final CameraFocusWidgetStatus _status;
 
   CameraFocusWidgetPainter(this._animation, this._status);
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, Size size){
     switch(_status) {
        case CameraFocusWidgetStatus.Idle:
           _drawOnIdle(canvas, size);
@@ -235,7 +249,7 @@ class CameraFocusWidgetPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
+  bool shouldRepaint(CustomPainter oldDelegate){
     return true;
   }
 }
