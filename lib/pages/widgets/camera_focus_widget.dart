@@ -134,6 +134,9 @@ class CameraFocusWidgetPainter extends CustomPainter {
        case CameraFocusWidgetStatus.Opening:
           _drawOpeningAnimation(canvas, size);
           break;
+       case CameraFocusWidgetStatus.Focusing:
+          _drawFocusingAnimation(canvas, size);
+          break;
        default: //nothing is drawn on screen when no focus state is set
           break;
     }
@@ -183,7 +186,7 @@ class CameraFocusWidgetPainter extends CustomPainter {
     if(!_animation.isCompleted)
        pen.color = Colors.lightGreen;
 
-    _drawFocusMark(canvas,paintRect,pen);
+    _drawFocusMark(canvas, paintRect, pen);
   }
 
   void _drawFocusMark(Canvas canvas, Rect rect, Paint pen){
@@ -208,6 +211,27 @@ class CameraFocusWidgetPainter extends CustomPainter {
                     Offset(rect.left, rect.bottom - length), pen);
     canvas.drawLine(Offset(rect.right, rect.bottom),
                     Offset(rect.right, rect.bottom - length), pen);
+  }
+
+  void _drawFocusingAnimation(Canvas canvas, Size size){
+    Paint pen = _pen();
+
+    double centerX = size.width/2.0;
+    double centerY = size.height/3.0; 
+
+    double roiRadiusWidth = size.width / 2.0 - 10.0;
+    double roiRadiusHeight = roiRadiusWidth / 2.2;
+
+    double delta = 1 + 0.07 * _animation.value;
+    roiRadiusWidth *= delta;
+    roiRadiusHeight *= delta;
+    Rect paintRect = Rect.fromLTRB(centerX - roiRadiusWidth, centerY - roiRadiusHeight,
+      centerX + roiRadiusWidth, centerY + roiRadiusHeight);
+    
+    if(!_animation.isCompleted)
+       pen.color = Colors.lightGreen;
+
+    _drawFocusMark(canvas, paintRect, pen);
   }
 
   @override
