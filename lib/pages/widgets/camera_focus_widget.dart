@@ -24,9 +24,8 @@ enum CameraFocusWidgetStatus {
 
 class CameraFocusWidget extends StatefulWidget {
   static CameraFocusWidgetStatus status = CameraFocusWidgetStatus.None;
-  
 
-  CameraFocusWidget(); 
+  const CameraFocusWidget(); 
 
   _CameraFocusWidgetState createState() => _CameraFocusWidgetState();
 }
