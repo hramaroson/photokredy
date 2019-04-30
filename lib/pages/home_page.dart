@@ -17,7 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:photokredy_core/photokredy_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photokredy/localizations.dart';
+import 'package:photokredy/application.dart';
 import 'widgets/camera_focus_widget.dart';
+import 'widgets/main_ui_widget.dart'; 
 
 import 'about_page.dart';
 import 'settings_page.dart';
@@ -147,9 +149,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
             Offstage(
               offstage: !_hasCameraAccess,
-              child: Container(
+              child: Container( 
                 child: CameraFocusWidget(),
               )
+            ),
+            Offstage(
+              offstage: !_hasCameraAccess,
+              child: MainUiWidget()
             )
           ],
         )
@@ -193,15 +199,15 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   void _onCameraOpened() {
-    setState(() => CameraFocusWidget.status = CameraFocusWidgetStatus.Opening);
+    setState(() => application.cameraStatus = CameraStatus.Opening);
   }
 
   void _onCameraClosed(){
-    setState(() => CameraFocusWidget.status = CameraFocusWidgetStatus.None);
+    setState(() => application.cameraStatus = CameraStatus.None);
   }
 
   void _onCameraFocusStarted(){
-    setState(() => CameraFocusWidget.status = CameraFocusWidgetStatus.Focusing);
+    setState(() => application.cameraStatus = CameraStatus.Focusing);
   }
 
   void _onFlashButtonPressed() async {

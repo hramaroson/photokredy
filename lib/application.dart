@@ -15,6 +15,13 @@
 
 import 'dart:ui';
 
+enum CameraStatus {
+    None,
+    Idle,
+    Opening,
+    Focusing,
+}
+
 class Application {
   static final Application _application = Application._internal();
 
@@ -38,8 +45,12 @@ class Application {
   //returns the list of supported Locales
   Iterable<Locale> supportedLocales() =>
       supportedLanguagesCodes.map<Locale>((language) => Locale(language, ""));
+
   //function to be invoked when changing the language
-  LocaleChangeCallback onLocaleChanged;
+  LocaleChangeCallback onLocaleChanged; 
+
+  //store camera status here to make available globally
+  CameraStatus cameraStatus = CameraStatus.None; 
 }
 Application application = Application();
 typedef void LocaleChangeCallback(Locale locale);

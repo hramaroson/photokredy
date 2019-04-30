@@ -14,17 +14,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-
-enum CameraFocusWidgetStatus {
-    None,
-    Idle,
-    Opening,
-    Focusing,
-}
+import 'package:photokredy/application.dart';
 
 class CameraFocusWidget extends StatefulWidget {
-  static CameraFocusWidgetStatus status = CameraFocusWidgetStatus.None;
-
   const CameraFocusWidget(); 
 
   _CameraFocusWidgetState createState() => _CameraFocusWidgetState();
@@ -32,7 +24,7 @@ class CameraFocusWidget extends StatefulWidget {
 
 class _CameraFocusWidgetState extends State<CameraFocusWidget> 
   with SingleTickerProviderStateMixin {
-  CameraFocusWidgetStatus _status = CameraFocusWidgetStatus.None;
+  CameraStatus _status = CameraStatus.None;
 
   AnimationController _controller;
   Animation<double> _animation; 
@@ -47,26 +39,27 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
 
   void _init(){
     //skip init if opening animation is already started
-    bool animated = (CameraFocusWidget.status == CameraFocusWidgetStatus.Opening 
-      && _status != CameraFocusWidgetStatus.Opening) 
+    bool animated = (application.cameraStatus == CameraStatus.Opening 
+      && _status != CameraStatus.Opening 
+      && _status != CameraStatus.Idle) 
 
     //skip init if focusing animation is already started (or opening animation while focusing)
-    || (CameraFocusWidget.status == CameraFocusWidgetStatus.Focusing 
-      && _status != CameraFocusWidgetStatus.Focusing 
-      && _status != CameraFocusWidgetStatus.Opening);
+    || (application.cameraStatus == CameraStatus.Focusing 
+      && _status != CameraStatus.Focusing 
+      && _status != CameraStatus.Opening);
 
 
     if(animated){ 
        _initAnimation();
     } 
-    else if(CameraFocusWidget.status == CameraFocusWidgetStatus.None){
-       _status = CameraFocusWidget.status;
+    else if(application.cameraStatus == CameraStatus.None){
+       _status = application.cameraStatus;
     }
   }
 
   void _initAnimation(){
      _controller.reset();
-    if(CameraFocusWidget.status == CameraFocusWidgetStatus.Focusing){
+    if(application.cameraStatus == CameraStatus.Focusing){
         //modify animation duration for focus animation
         _controller.duration = Duration(milliseconds: 400); 
     }
@@ -80,26 +73,26 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
       )
       ..addStatusListener(_handleAnimationStatus);
         
-      _status = CameraFocusWidget.status;
+      _status = application.cameraStatus;
       _controller.forward();
   }
 
   void _handleAnimationStatus(AnimationStatus status){
     if (status == AnimationStatus.completed) {
-      if(_status == CameraFocusWidgetStatus.Focusing) {
+      if(_status == CameraStatus.Focusing) {
          _controller.reverse(); //bring the focus marker to its idle  position
       } else {
          //get back to idle state
-          CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
-          _status = CameraFocusWidgetStatus.Idle;
+          application.cameraStatus = CameraStatus.Idle; 
+          _status = CameraStatus.Idle;
       }
           
     }
     else if(status == AnimationStatus.dismissed) {
-      if(_status == CameraFocusWidgetStatus.Focusing){
+      if(_status == CameraStatus.Focusing){
         //get back to idle state
-        CameraFocusWidget.status = CameraFocusWidgetStatus.Idle; 
-        _status = CameraFocusWidgetStatus.Idle;
+        application.cameraStatus = CameraStatus.Idle; 
+        _status = CameraStatus.Idle;
       }
     }
   }
@@ -134,20 +127,20 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
 
 class CameraFocusWidgetPainter extends CustomPainter{
   Animation<double> _animation;
-  final CameraFocusWidgetStatus _status;
+  final CameraStatus _status;
 
   CameraFocusWidgetPainter(this._animation, this._status);
 
   @override
   void paint(Canvas canvas, Size size){
     switch(_status) {
-       case CameraFocusWidgetStatus.Idle:
+       case CameraStatus.Idle:
           _drawOnIdle(canvas, size);
           break;
-       case CameraFocusWidgetStatus.Opening:
+       case CameraStatus.Opening:
           _drawOpeningAnimation(canvas, size);
           break;
-       case CameraFocusWidgetStatus.Focusing:
+       case CameraStatus.Focusing:
           _drawFocusingAnimation(canvas, size);
           break;
        default: //nothing is drawn on screen when no focus state is set
