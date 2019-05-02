@@ -51,6 +51,8 @@ class Application {
 
   //store camera status here to make available globally
   CameraStatus cameraStatus = CameraStatus.None; 
+
+  bool soundEnabled = false;
 }
 Application application = Application();
 typedef void LocaleChangeCallback(Locale locale);

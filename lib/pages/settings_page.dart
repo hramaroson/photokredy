@@ -34,11 +34,12 @@ class SettingsPage extends StatelessWidget {
           displayValues: application.supportedLanguages,
           onChange: (languageCode) => _onLocaleChanged(languageCode),
         ),
+
         SwitchPreference(
           AppLocalizations.of(context).settings_page_sound(), 
           "sound",
           desc: AppLocalizations.of(context).settings_page_sound_desc(),
-          defaultVal: false)
+          defaultVal: application.soundEnabled) 
       ]),
     );
   }
