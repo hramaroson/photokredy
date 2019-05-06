@@ -25,6 +25,7 @@ class SettingsPage extends StatelessWidget {
       appBar: new AppBar(title: new Text(AppLocalizations.of(context).settings())),
       body: PreferencePage([
         PreferenceTitle(AppLocalizations.of(context).settings_page_general()),
+
         DropdownPreference(
           AppLocalizations.of(context).settings_page_language(), 
           "language",
@@ -32,7 +33,9 @@ class SettingsPage extends StatelessWidget {
           defaultVal: Localizations.localeOf(context).languageCode,
           values: application.supportedLanguagesCodes,
           displayValues: application.supportedLanguages,
-          onChange: (languageCode) => _onLocaleChanged(languageCode),
+          onChange: (languageCode) {
+              application.onLocaleChanged(Locale(languageCode));
+          }
         ),
 
         SwitchPreference(
@@ -40,18 +43,15 @@ class SettingsPage extends StatelessWidget {
           "sound",
           desc: AppLocalizations.of(context).settings_page_sound_desc(),
           defaultVal: application.soundEnabled,
-          onChange: (enabled) => _onSoundEnabled(enabled),
+          onEnable: () {
+              application.soundEnabled = true;
+          },
+          onDisable: () {
+              application.soundEnabled = false;
+          }
         )
 
       ]),
     );
-  }
-
-  void  _onLocaleChanged(String languageCode){
-    application.onLocaleChanged(Locale(languageCode));
-  }
-
-  void _onSoundEnabled(String enabled){
-    //application.soundEnabled = enabled;
   }
 }
