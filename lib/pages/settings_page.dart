@@ -39,11 +39,19 @@ class SettingsPage extends StatelessWidget {
           AppLocalizations.of(context).settings_page_sound(), 
           "sound",
           desc: AppLocalizations.of(context).settings_page_sound_desc(),
-          defaultVal: application.soundEnabled) 
+          defaultVal: application.soundEnabled,
+          onChange: (enabled) => _onSoundEnabled(enabled),
+        )
+
       ]),
     );
   }
+
   void  _onLocaleChanged(String languageCode){
     application.onLocaleChanged(Locale(languageCode));
+  }
+
+  void _onSoundEnabled(String enabled){
+    //application.soundEnabled = enabled;
   }
 }

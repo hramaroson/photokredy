@@ -14,7 +14,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audio_cache.dart';
 import 'package:photokredy/application.dart';
+
+const String cameraFocusSound = "camera_focus_beep.mp3";
 
 class CameraFocusWidget extends StatefulWidget {
   const CameraFocusWidget(); 
@@ -28,6 +31,8 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
 
   AnimationController _controller;
   Animation<double> _animation; 
+
+  AudioCache _player = AudioCache();
   
   @override
   void initState(){
@@ -62,6 +67,13 @@ class _CameraFocusWidgetState extends State<CameraFocusWidget>
     if(application.cameraStatus == CameraStatus.Focusing){
         //modify animation duration for focus animation
         _controller.duration = Duration(milliseconds: 400); 
+
+        if(application.soundEnabled) {
+            _player.play(cameraFocusSound);
+        }
+    }
+    else {
+        _controller.duration = Duration(milliseconds: 700); 
     }
     _animation = Tween<double> (
       begin: 0.0,
