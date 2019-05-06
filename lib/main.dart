@@ -46,7 +46,8 @@ class _MyAppState extends State<MyApp> {
 
     application.onLocaleChanged = onLocaleChange;
 
-    application.soundEnabled = PrefService.getBool("sound");
+    bool soundEnabled = PrefService.getBool("sound");  
+    application.soundEnabled = (soundEnabled == null)? true : soundEnabled;
   }
 
   @override
