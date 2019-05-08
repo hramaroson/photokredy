@@ -1,0 +1,28 @@
+image: javiersantos/android-ci: 28.0.3
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b stable
+  - export PATH="$PATH:`pwd`/flutter/bin"
+  - flutter doctor
+  - flutter packages upgrade
+
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  paths:
+    - $HOME/.pub-cache
+    - $HOME/.android/build-cache
+    - $HOME/.m2
+    - $HOME/.gradle
+    - $HOME/.gradle/caches
+    - $HOME/.gradle/wrapper
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - flutter test
