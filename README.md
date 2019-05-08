@@ -2,9 +2,26 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 [![Build Status](https://travis-ci.org/hramaroson/photokredy.svg?branch=master)](https://travis-ci.org/hramaroson/photokredy) 
+[![pipeline status](https://gitlab.com/hramaroson/photokredy/badges/master/pipeline.svg)](https://gitlab.com/hramaroson/photokredy/pipelines)
 
 Mobile app providing prepaid phone card fast and easy scanning.
 
+## Building the project
+### Development environment setup
+The following tools are required:
+
+### Download and build the project
+Clone the repository with the 'git clone' command.
+
+```
+$ git clone --recurse-submodules https://github.com/hramaroson/photokredy.git
+```
+
+Install dependencies in pubspec.yaml by running the following command in the project root directory (see [using packages documentation](https://flutter.io/using-packages/#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+
+```
+$ flutter packages get
+```
 
 ## Licenses
 <img src="https://gnu.org/graphics/gplv3-127x51.png" alt=""/>
