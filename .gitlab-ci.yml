@@ -1,4 +1,4 @@
-image: javiersantos/android-ci: 28.0.3
+image: javiersantos/android-ci:28.0.3
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
@@ -25,4 +25,4 @@ stages:
 test:
   stage: test
   script:
-    - flutter test
+    - flutter test -v
