@@ -6,7 +6,7 @@
 Mobile app providing prepaid phone card fast and easy scanning.
 
 ## Building the project
-### Development environment setup
+### Setup development environment
 The following tools are required:
 * [Android Studio](https://developer.android.com/studio/) with [Dart/Flutter plugin](https://flutter.dev/docs/get-started/editor) installed.
 * [Flutter](https://flutter.dev/docs/get-started/install/)
