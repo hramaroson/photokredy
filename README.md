@@ -1,26 +1,39 @@
 # PhotoKredy
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
-[![Build Status](https://travis-ci.org/hramaroson/photokredy.svg?branch=master)](https://travis-ci.org/hramaroson/photokredy) 
-[![pipeline status](https://gitlab.com/hramaroson/photokredy/badges/master/pipeline.svg)](https://gitlab.com/hramaroson/photokredy/pipelines)
+| | **Travis CI**|**Gitlab CI**|
+|---  |---  |---  |
+| [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE) | [![Build Status](https://travis-ci.org/hramaroson/photokredy.svg?branch=master)](https://travis-ci.org/hramaroson/photokredy) | [![pipeline status](https://gitlab.com/hramaroson/photokredy/badges/master/pipeline.svg)](https://gitlab.com/hramaroson/photokredy/pipelines) |
 
 Mobile app providing prepaid phone card fast and easy scanning.
 
 ## Building the project
 ### Development environment setup
 The following tools are required:
+* [Android Studio](https://developer.android.com/studio/) with [Dart/Flutter plugin](https://flutter.dev/docs/get-started/editor) installed.
+* [Flutter](https://flutter.dev/docs/get-started/install/)
+* [Visual Studio Code](https://code.visualstudio.com/download) with [Dart/Flutter plugin](https://dartcode.org/) installed (optional, for code editing).
+
 
 ### Download and build the project
-Clone the repository with the 'git clone' command.
+* Clone the repository with the `git clone` command.
 
 ```
 $ git clone --recurse-submodules https://github.com/hramaroson/photokredy.git
 ```
 
-Install dependencies in pubspec.yaml by running the following command in the project root directory (see [using packages documentation](https://flutter.io/using-packages/#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+* Install dependencies in `pubspec.yaml` by running the following command in the project root directory (see [using packages documentation](https://flutter.io/using-packages/#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
 
 ```
 $ flutter packages get
+```
+* Build the project:
+    - On Android (armeabi-v7a):  `flutter build apk`
+    - On Android (arm64-v8a): `flutter build apk --target=android-arm64`
+    - On iOS: `flutter build ios`
+
+* If you have a connected device or emulator you can run and deploy the app by running :
+
+```
+$ flutter run
 ```
 
 ## Licenses
