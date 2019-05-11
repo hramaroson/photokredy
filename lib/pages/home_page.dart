@@ -35,11 +35,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   CameraController _cameraController;
   Icon _flashButtonIcon = Icon(Icons.flash_off);
   bool _hasCameraAccess = false;
+  bool _firstStart = true;
   
   void _init(){
     PermissionHandler().checkPermissionStatus(PermissionGroup.camera).then((status){
          setState(() => _hasCameraAccess = (status == PermissionStatus.granted));
+         _firstStart = false;
     });
+
   }
 
   @override
@@ -142,7 +145,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               )
             ),
             Offstage(
-              offstage: _hasCameraAccess,
+              offstage: _hasCameraAccess || _firstStart,
               child: Center (
                 child: _cameraPermissionRequestDialog()
               )
