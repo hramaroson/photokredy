@@ -20,7 +20,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return new Scaffold(
-      appBar: new AppBar(title: Text(AppLocalizations.of(context).about())),
+      appBar: new AppBar(title: Text(AppLocalizations.of(context).aboutPageTitle())),
     );
   }
 }

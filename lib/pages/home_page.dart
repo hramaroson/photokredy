@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             children: <Widget>[
               DrawerHeader(
                 child: Text(
-                  AppLocalizations.of(context).app_title() , 
+                  AppLocalizations.of(context).appTitle() , 
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
                   decoration: BoxDecoration(
                       color: Colors.blue
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ListTile(
                 leading: const Icon(Icons.settings , color: Colors.blue,),
                 title: Text(
-                  AppLocalizations.of(context).settings(), 
+                  AppLocalizations.of(context).settingsPageTitle(),  
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ListTile(
                 leading: const Icon(Icons.info_outline , color: Colors.blue,),
                 title: Text(
-                  AppLocalizations.of(context).about(), 
+                  AppLocalizations.of(context).aboutPageTitle(), 
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                 onTap: () {
                   Navigator.pop(context);
@@ -178,11 +178,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            AppLocalizations.of(context).homepage_camera_request_dialog_message() , 
+            AppLocalizations.of(context).homePageCameraRequestDialogContentText() , 
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400, color: Colors.white)),
           RaisedButton( 
             child: Text(
-              AppLocalizations.of(context).homepage_camera_request_dialog_allow(), 
+              AppLocalizations.of(context).homePageCameraRequestDialogButtonLabel(), 
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.black)),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               onPressed: () {

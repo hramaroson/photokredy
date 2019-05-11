@@ -1,53 +1,53 @@
 {
     "@@last_modified": "2019-03-27T16:10:09.212995",
     "@@locale": "fr",
-    "app_title": "PhotoKredy",
-    "@app_title": {
+    "appTitle": "PhotoKredy",
+    "@appTitle": {
       "type": "text",
       "placeholders": {}
     },
-    "settings": "Paramètres",
-    "@settings": {
+    "settingsPageTitle": "Paramètres",
+    "@settingsPageTitle": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_general": "Général",
-    "@settings_page_general": {
+    "settingsPageGeneralPreferenceTitle": "Général",
+    "@settingsPageGeneralPreferenceTitle": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_language": "Langue",
-    "@settings_page_language": {
+    "settingsPageLanguageDropdownLabel": "Langue",
+    "@settingsPageLanguageDropdownLabel": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_language_desc": "Langue de l'interface",
-    "@settings_page_language_desc": {
+    "settingsPageLanguageDropdownDesc": "Langue de l'interface",
+    "@settingsPageLanguageDropdownDesc": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound": "Son",
-    "@settings_page_sound": {
+    "settingsPageSoundSwitchLabel": "Son",
+    "@settingsPageSoundSwitchLabel": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound_desc": "Activer/désactiver le son",
-    "@settings_page_sound_desc": {
+    "settingsPageSoundSwitchDesc": "Activer/désactiver le son",
+    "@settingsPageSoundSwitchDesc": {
       "type": "text",
       "placeholders": {}
     },
-    "about": "A propos",
-    "@about": {
+    "aboutPageTitle": "A propos",
+    "@aboutPageTitle": {
     "type": "text",
     "placeholders": {}
     },
-    "homepage_camera_request_dialog_allow": "Autoriser",
-    "@homepage_camera_request_dialog_allow": {
+    "homePageCameraRequestDialogButtonLabel": "Autoriser",
+    "@homePageCameraRequestDialogButtonLabel": {
       "type": "text",
       "placeholders": {}
     },
-    "homepage_camera_request_dialog_message": "PhotoKredy a besoin de la camera",
-    "@homepage_camera_request_dialog_message": {
+    "homePageCameraRequestDialogContentText": "PhotoKredy a besoin de la camera",
+    "@homePageCameraRequestDialogContentText": {
       "type": "text",
       "placeholders": {}
     }

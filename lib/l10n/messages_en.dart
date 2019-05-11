@@ -20,15 +20,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "about" : MessageLookupByLibrary.simpleMessage("About"),
-    "app_title" : MessageLookupByLibrary.simpleMessage("PhotoKredy"),
-    "homepage_camera_request_dialog_allow" : MessageLookupByLibrary.simpleMessage("Allow"),
-    "homepage_camera_request_dialog_message" : MessageLookupByLibrary.simpleMessage("PhotoKredy needs a Camera"),
-    "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
-    "settings_page_general" : MessageLookupByLibrary.simpleMessage("General"),
-    "settings_page_language" : MessageLookupByLibrary.simpleMessage("Language"),
-    "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Language used by the interface"),
-    "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Sound"),
-    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Enable/disable sound")
+    "aboutPageTitle" : MessageLookupByLibrary.simpleMessage("About"),
+    "appTitle" : MessageLookupByLibrary.simpleMessage("PhotoKredy"),
+    "homePageCameraRequestDialogButtonLabel" : MessageLookupByLibrary.simpleMessage("Allow"),
+    "homePageCameraRequestDialogContentText" : MessageLookupByLibrary.simpleMessage("PhotoKredy needs a Camera"),
+    "settingsPageGeneralPreferenceTitle" : MessageLookupByLibrary.simpleMessage("General"),
+    "settingsPageLanguageDropdownDesc" : MessageLookupByLibrary.simpleMessage("Language used by the interface"),
+    "settingsPageLanguageDropdownLabel" : MessageLookupByLibrary.simpleMessage("Language"),
+    "settingsPageSoundSwitchDesc" : MessageLookupByLibrary.simpleMessage("Enable/disable sound"),
+    "settingsPageSoundSwitchLabel" : MessageLookupByLibrary.simpleMessage("Sound"),
+    "settingsPageTitle" : MessageLookupByLibrary.simpleMessage("Settings")
   };
 }

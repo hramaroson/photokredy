@@ -15,21 +15,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:preferences/preferences.dart';
-
+ 
 import 'package:photokredy/localizations.dart';
 import 'package:photokredy/application.dart';
 
 class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold (
-      appBar: new AppBar(title: new Text(AppLocalizations.of(context).settings())),
+      appBar: new AppBar(title: new Text(AppLocalizations.of(context).settingsPageTitle())),
       body: PreferencePage([
-        PreferenceTitle(AppLocalizations.of(context).settings_page_general()),
+        PreferenceTitle(AppLocalizations.of(context).settingsPageGeneralPreferenceTitle()),
 
         DropdownPreference(
-          AppLocalizations.of(context).settings_page_language(), 
+          AppLocalizations.of(context).settingsPageLanguageDropdownLabel(),  
           "language",
-          desc: AppLocalizations.of(context).settings_page_language_desc(),
+          desc: AppLocalizations.of(context).settingsPageLanguageDropdownDesc(),
           defaultVal: Localizations.localeOf(context).languageCode,
           values: application.supportedLanguagesCodes,
           displayValues: application.supportedLanguages,
@@ -39,9 +39,9 @@ class SettingsPage extends StatelessWidget {
         ),
 
         SwitchPreference(
-          AppLocalizations.of(context).settings_page_sound(), 
+          AppLocalizations.of(context).settingsPageSoundSwitchLabel(), 
           "sound",
-          desc: AppLocalizations.of(context).settings_page_sound_desc(),
+          desc: AppLocalizations.of(context).settingsPageSoundSwitchDesc(),
           defaultVal: application.soundEnabled,
           onEnable: () {
               application.soundEnabled = true;

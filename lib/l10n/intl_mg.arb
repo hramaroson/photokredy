@@ -1,53 +1,53 @@
 {
     "@@last_modified": "2019-03-27T16:10:09.212995",
     "@@locale": "mg",
-    "app_title": "PhotoKredy",
-    "@app_title": {
+    "appTitle": "PhotoKredy",
+    "@appTitle": {
       "type": "text",
       "placeholders": {}
     },
-    "settings": "Pitsopitsony",
-    "@settings": {
+    "settingsPageTitle": "Pitsopitsony",
+    "@settingsPageTitle": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_general": "Ankapobeiny",
-    "@settings_page_general": {
+    "settingsPageGeneralPreferenceTitle": "Ankapobeiny",
+    "@settingsPageGeneralPreferenceTitle": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_language": "Teny",
-    "@settings_page_language": {
+    "settingsPageLanguageDropdownLabel": "Teny",
+    "@settingsPageLanguageDropdownLabel": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_language_desc": "Teny ampiasaina",
-    "@settings_page_language_desc": {
+    "settingsPageLanguageDropdownDesc": "Teny ampiasaina",
+    "@settingsPageLanguageDropdownDesc": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound": "Feo",
-    "@settings_page_sound": {
+    "settingsPageSoundSwitchLabel": "Feo",
+    "@settingsPageSoundSwitchLabel": {
       "type": "text",
       "placeholders": {}
     },
-    "settings_page_sound_desc": "Alefa/vonoina ny feo",
-    "@settings_page_sound_desc": {
+    "settingsPageSoundSwitchDesc": "Alefa/vonoina ny feo",
+    "@settingsPageSoundSwitchDesc": {
       "type": "text",
       "placeholders": {}
     },
-    "about": "Mombamomba",
-    "@about": {
+    "aboutPageTitle": "Mombamomba",
+    "@aboutPageTitle": {
     "type": "text",
     "placeholders": {}
     },
-    "homepage_camera_request_dialog_allow": "Omena alalana",
-    "@homepage_camera_request_dialog_allow": {
+    "homePageCameraRequestDialogButtonLabel": "Omena alalana",
+    "@homePageCameraRequestDialogButtonLabel": {
       "type": "text",
       "placeholders": {}
     },
-    "homepage_camera_request_dialog_message": "Mila ny Camera PhotoKredy",
-    "@homepage_camera_request_dialog_message": {
+    "homePageCameraRequestDialogContentText": "Mila ny Camera PhotoKredy",
+    "@homePageCameraRequestDialogContentText": {
       "type": "text",
       "placeholders": {}
     }

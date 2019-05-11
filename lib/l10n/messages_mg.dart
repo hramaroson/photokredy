@@ -20,15 +20,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "about" : MessageLookupByLibrary.simpleMessage("Mombamomba"),
-    "app_title" : MessageLookupByLibrary.simpleMessage("PhotoKredy"),
-    "homepage_camera_request_dialog_allow" : MessageLookupByLibrary.simpleMessage("Omena alalana"),
-    "homepage_camera_request_dialog_message" : MessageLookupByLibrary.simpleMessage("Mila ny Camera PhotoKredy"),
-    "settings" : MessageLookupByLibrary.simpleMessage("Pitsopitsony"),
-    "settings_page_general" : MessageLookupByLibrary.simpleMessage("Ankapobeiny"),
-    "settings_page_language" : MessageLookupByLibrary.simpleMessage("Teny"),
-    "settings_page_language_desc" : MessageLookupByLibrary.simpleMessage("Teny ampiasaina"),
-    "settings_page_sound" : MessageLookupByLibrary.simpleMessage("Feo"),
-    "settings_page_sound_desc" : MessageLookupByLibrary.simpleMessage("Alefa/vonoina ny feo")
+    "aboutPageTitle" : MessageLookupByLibrary.simpleMessage("Mombamomba"),
+    "appTitle" : MessageLookupByLibrary.simpleMessage("PhotoKredy"),
+    "homePageCameraRequestDialogButtonLabel" : MessageLookupByLibrary.simpleMessage("Omena alalana"),
+    "homePageCameraRequestDialogContentText" : MessageLookupByLibrary.simpleMessage("Mila ny Camera PhotoKredy"),
+    "settingsPageGeneralPreferenceTitle" : MessageLookupByLibrary.simpleMessage("Ankapobeiny"),
+    "settingsPageLanguageDropdownDesc" : MessageLookupByLibrary.simpleMessage("Teny ampiasaina"),
+    "settingsPageLanguageDropdownLabel" : MessageLookupByLibrary.simpleMessage("Teny"),
+    "settingsPageSoundSwitchDesc" : MessageLookupByLibrary.simpleMessage("Alefa/vonoina ny feo"),
+    "settingsPageSoundSwitchLabel" : MessageLookupByLibrary.simpleMessage("Feo"),
+    "settingsPageTitle" : MessageLookupByLibrary.simpleMessage("Pitsopitsony")
   };
 }

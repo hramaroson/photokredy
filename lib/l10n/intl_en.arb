@@ -1,53 +1,53 @@
 {
   "@@last_modified": "2019-03-27T13:25:30.664775",
   "@@locale": "en",
-  "app_title": "PhotoKredy",
-  "@app_title": {
+  "appTitle": "PhotoKredy",
+  "@appTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "settings": "Settings",
-  "@settings": {
+  "settingsPageTitle": "Settings",
+  "@settingsPageTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "settings_page_general": "General",
-  "@settings_page_general": {
+  "settingsPageGeneralPreferenceTitle": "General",
+  "@settingsPageGeneralPreferenceTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "settings_page_language": "Language",
-  "@settings_page_language": {
+  "settingsPageLanguageDropdownLabel": "Language",
+  "@settingsPageLanguageDropdownLabel": {
     "type": "text",
     "placeholders": {}
   },
-  "settings_page_language_desc": "Language used by the interface",
-  "@settings_page_language_desc": {
+  "settingsPageLanguageDropdownDesc": "Language used by the interface",
+  "@settingsPageLanguageDropdownDesc": {
     "type": "text",
     "placeholders": {}
   },
-  "settings_page_sound": "Sound",
-  "@settings_page_sound": {
+  "settingsPageSoundSwitchLabel": "Sound",
+  "@settingsPageSoundSwitchLabel": {
     "type": "text",
     "placeholders": {}
   },
-  "settings_page_sound_desc": "Enable/disable sound",
-  "@settings_page_sound_desc": {
+  "settingsPageSoundSwitchDesc": "Enable/disable sound",
+  "@settingsPageSoundSwitchDesc": {
     "type": "text",
     "placeholders": {}
   },
-  "about": "About",
-  "@about": {
+  "aboutPageTitle": "About",
+  "@aboutPageTitle": {
     "type": "text",
     "placeholders": {}
   },
-  "homepage_camera_request_dialog_allow": "Allow",
-  "@homepage_camera_request_dialog_allow": {
+  "homePageCameraRequestDialogButtonLabel": "Allow",
+  "@homePageCameraRequestDialogButtonLabel": {
     "type": "text",
     "placeholders": {}
   },
-  "homepage_camera_request_dialog_message": "PhotoKredy needs a Camera",
-  "@homepage_camera_request_dialog_message": {
+  "homePageCameraRequestDialogContentText": "PhotoKredy needs a Camera",
+  "@homePageCameraRequestDialogContentText": {
     "type": "text",
     "placeholders": {}
   }
